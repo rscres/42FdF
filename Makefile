@@ -8,6 +8,8 @@ CC_FLAGS = -Wall -Werror -Wextra
 SRC = main.c
 #Object files
 OBJ = $(SRC:.c=.o)
+#Libraries
+LIBS = ./libs/
 
 all: $(NAME)
 
