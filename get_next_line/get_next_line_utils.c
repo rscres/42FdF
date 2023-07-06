@@ -6,13 +6,13 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 20:21:10 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/05/31 13:55:28 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/05 15:44:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-t_char	*ft_lstnew(char content)
+t_char	*ft_lstnew_(char content)
 {
 	t_char			*node;
 
@@ -24,7 +24,7 @@ t_char	*ft_lstnew(char content)
 	return (node);
 }
 
-int	ft_lstsize(t_char *lst)
+int	ft_lstsize_(t_char *lst)
 {
 	int	size;
 
@@ -39,7 +39,7 @@ int	ft_lstsize(t_char *lst)
 	return (size);
 }
 
-void	ft_lstadd_back(t_char **lst, t_char *node)
+void	ft_lstadd_back_(t_char **lst, t_char *node)
 {
 	t_char	**current;
 

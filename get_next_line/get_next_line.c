@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 16:27:15 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/06/15 18:26:27 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/03 18:26:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static char	*line_writer(t_char **lst)
 	char	*line_ret;
 	int		i;
 
-	line_ret = malloc((ft_lstsize(*lst) + 1) * sizeof(char));
+	line_ret = malloc((ft_lstsize_(*lst) + 1) * sizeof(char));
 	if (!line_ret)
 		return (NULL);
 	line = *lst;
@@ -37,11 +37,11 @@ static char	*line_writer(t_char **lst)
 	return (line_ret);
 }
 
-static char	*line_reader(t_data *data, t_char *head, int fd)
+static char	*line_reader(t_file_data *data, t_char *head, int fd)
 {
 	while (data->bytesread > 0)
 	{
-		ft_lstadd_back(&head, ft_lstnew(data->str[data->pos]));
+		ft_lstadd_back_(&head, ft_lstnew_(data->str[data->pos]));
 		if (data->str[data->pos] == '\n' || data->str[data->pos] == '\0')
 			break ;
 		if (data->pos == data->bytesread - 1 || data->bytesread == 1)
@@ -60,7 +60,7 @@ static char	*line_reader(t_data *data, t_char *head, int fd)
 char	*get_next_line(int fd)
 {
 	t_char			*head;
-	static t_data	data;
+	static t_file_data	data;
 	
 	// printf("static: %s\n", data.str);
 	if (data.pos >= data.bytesread || data.pos == 0)
