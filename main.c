@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:15:29 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/07 14:57:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/07 19:43:49 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	draw_grid(t_map map, t_img *data)
 		dist = WINDOW_WIDTH / map.width;
 		start.x = (WINDOW_WIDTH - (map.width * dist)) / 2;
 		start.y = (WINDOW_HEIGHT - (map.height * dist)) / 2;
-		tmpx = start.x;
 		tmpx = start.x;
 		tmpy = start.y;
 	}
