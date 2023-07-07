@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/06 20:27:40 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/07 14:54:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@
 # include "get_next_line/get_next_line.h"
 
 # define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
-
+# define WINDOW_HEIGHT 1000
 typedef struct s_img {
 	void	*img;
 	char	*addr;
