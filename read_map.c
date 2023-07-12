@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/07 19:40:54 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:07:02 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,37 @@ static void	map_size(char *buffer, t_map *map)
 	}
 }
 
-// int	atox(char *str)
-// {
-// 	char	base[16];
-// 	int		num;
+unsigned int	atox(char *hex)
+{
+	unsigned int	val;
+	__uint8_t		byte;
 
-// 	base = "0123456789ABCDEF";
-// 	while (ft_strchr(base, *str))
-// 		num = num * 10 + (*str++ - '0');
-// }
+	val = 0;
+	while (*hex)
+	{
+		byte = *hex;
+		if (byte >= '0' && byte <= '9')
+			byte = byte - '0';
+		else if (byte >= 'a' && byte <= 'f')
+			byte = byte - 'a' + 10;
+		else if (byte >= 'A' && byte <= 'F')
+			byte = byte - 'A' + 10;
+		val = (val << 4) | (byte & 0xF);
+		hex++;
+	}
+	return (val);
+}
 
 void	data_setter(t_map_point **head, int j, int i, char **line)
 {
-	int		color;
-	int		height;
-	char	**values;
+	unsigned int		color;
+	int					height;
+	char				**values;
 
 	if (ft_strchr(line[j], ','))
 	{
 		values = ft_split(line[j], ',');
-		color = (int)strtol(values[1], NULL, 16);
+		color = atox(values[1] + 2);
 		height = ft_atoi(values[0]);
 		dbladd_back(&head[i], dbllst_new(j, i, color, height));
 	}
@@ -98,22 +109,8 @@ int	read_map(char *map_file, t_img *data)
 	map_size(buffer, &map);
 	map_points = malloc(sizeof(t_map_point *) * map.height);
 	matrix_creator(map_points, buffer, map);
-	// int i = 0;
-	// int j = 0;
-	// while (j < map.height)
-	// {
-	// 	printf("%d\t", j);
-	// 	while (i < map.width)
-	// 	{
-	// 		printf("%d\t", map_points[j]->color);
-	// 		i++;
-	// 		map_points[j] = map_points[j]->next;
-	// 	}
-	// 	printf("\n");
-	// 	i = 0;
-	// 	j++;
-	// }
-	draw_grid(map, data);
+	plot_grid(map, map_points);
+	draw(data, map, map_points);
 	close(fd);
 	return (1);
 }

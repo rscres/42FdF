@@ -8,7 +8,12 @@ CC = cc
 CC_FLAGS = -Wall -Werror -Wextra -g3
 
 #Source files
-SRC = main.c read_map.c draw_line.c linked_lst.c
+SRC = 	main.c			\
+		read_map.c		\
+		draw_line.c		\
+		linked_lst.c	\
+		plot_grid.c		\
+		draw.c
 
 #Object files
 OBJ = $(SRC:.c=.o)

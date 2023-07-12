@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/07 14:54:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/12 19:54:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
-# include "get_next_line/get_next_line.h"
+// # include "get_next_line/get_next_line.h"
+// # include "linked_lst.h"
 
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
+
 typedef struct s_img {
 	void	*img;
 	char	*addr;
@@ -35,6 +37,7 @@ typedef struct s_img {
 typedef struct s_point {
 	int		x;
 	int		y;
+	int		z;
 }				t_point;
 
 typedef struct s_delta {
@@ -61,10 +64,15 @@ enum {
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void	draw_grid(t_map map, t_img *data);
 
+//plot_grid.c
+
+
 //read_map.c
 int		read_map(char *map, t_img *data);
 
 //draw_line.c
-void	drawLine(t_img *data, t_point p1, t_point p2);
+void	draw_line(t_img *data, t_point p1, t_point p2);
+
+
 
 #endif // FDF_H
