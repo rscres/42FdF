@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/06 16:35:17 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/12 20:11:09 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ int int_part_num(float x)
 	
 // }
 
-void	drawLine(t_img *data, t_point p1, t_point p2)
+void	draw_line(t_img *data, t_point p1, t_point p2)
 {
 	int		steep;
 	t_delta	delta;
 	t_point	pxl;
 	float	intersect;
 	float	slope;
+	// int		color;
+	// int		color_step;
 
+	// printf("draw_line\n");
 	steep = abs_(p2.y - p1.y) > abs_(p2.x - p1.x);
 	if (steep)
 	{
@@ -75,7 +78,6 @@ void	drawLine(t_img *data, t_point p1, t_point p2)
 			intersect += slope;
 			x++;
 		}
-
 	}
 	else
 	{

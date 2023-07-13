@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/12 20:02:22 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:00:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static int	get_dist(t_map map, t_map_point **head)
 		dist = WINDOW_HEIGHT / map.height - 1;
 	else
 		dist = WINDOW_WIDTH / map.width - 1;
-	current->points.x = (WINDOW_WIDTH - (map.width * dist)) / 2;
-	current->points.y = (WINDOW_HEIGHT - (map.height * dist)) / 2;
+	current->points.x = (WINDOW_WIDTH - ((map.width - 1) * dist)) / 2;
+	current->points.y = (WINDOW_HEIGHT - ((map.height - 1) * dist)) / 2;
 	return (dist);
 }
 
@@ -43,6 +43,7 @@ void	plot_grid(t_map map, t_map_point **head)
 	i = 0;
 	while (i < map.height)
 	{
+		current = head[i];
 		current->points.x = tmpx;
 		while (current != NULL)
 		{
@@ -51,7 +52,6 @@ void	plot_grid(t_map map, t_map_point **head)
 			current = current->next;
 		}
 		i++;
-		current = head[i];
 		tmpy += dist;
 	}
 }

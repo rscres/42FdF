@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/12 19:54:01 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/12 21:03:15 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // # include "get_next_line/get_next_line.h"
 // # include "linked_lst.h"
 
-# define WINDOW_WIDTH 1280
+# define WINDOW_WIDTH 720
 # define WINDOW_HEIGHT 720
 
 typedef struct s_img {
@@ -62,7 +62,6 @@ enum {
 
 //main.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void	draw_grid(t_map map, t_img *data);
 
 //plot_grid.c
 

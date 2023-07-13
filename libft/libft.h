@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:05:47 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/05 16:16:33 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/10 12:54:28 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+
+# define HEX_CAPS	"0123456789ABCDEF"
+# define HEX_LOW	"0123456789abcdef"
 
 // Char functions
 int		ft_toupper(int a);
