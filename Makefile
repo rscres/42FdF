@@ -19,7 +19,7 @@ SRC = 	main.c			\
 OBJ = $(SRC:.c=.o)
 
 #Libraries
-LIBS = -Lmlx_linux -lmlx_Linux -Lget_next_line -lgetnextline -Llibft -lft -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
+LIBS = -lmlx -Lget_next_line -lgetnextline -Llibft -lft -L/usr/lib -lXext -lX11 -lm -lz
 
 all: $(NAME)
 

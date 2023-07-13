@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/12 21:03:15 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/13 13:41:19 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ typedef struct s_delta {
 typedef struct s_map {
 	int	height;
 	int	width;
+	int max_z;
+	int min_z;
 }				t_map;
 
 enum {

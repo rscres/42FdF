@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/12 21:00:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/13 12:47:38 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	get_dist(t_map map, t_map_point **head)
 
 	current = head[0];
 	if (WINDOW_WIDTH / map.width >= WINDOW_HEIGHT / map.height)
-		dist = WINDOW_HEIGHT / map.height - 1;
+		dist = WINDOW_HEIGHT / map.height;
 	else
-		dist = WINDOW_WIDTH / map.width - 1;
+		dist = WINDOW_WIDTH / map.width;
 	current->points.x = (WINDOW_WIDTH - ((map.width - 1) * dist)) / 2;
 	current->points.y = (WINDOW_HEIGHT - ((map.height - 1) * dist)) / 2;
 	return (dist);
