@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/13 13:41:19 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:26:21 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
-// # include "get_next_line/get_next_line.h"
-// # include "linked_lst.h"
 
-# define WINDOW_WIDTH 720
+# define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 720
 
 typedef struct s_img {
@@ -48,8 +46,8 @@ typedef struct s_delta {
 typedef struct s_map {
 	int	height;
 	int	width;
-	int max_z;
-	int min_z;
+	int	max_z;
+	int	min_z;
 }				t_map;
 
 enum {
@@ -65,7 +63,7 @@ enum {
 //main.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-//plot_grid.c
+//plot_matrix.c
 
 
 //read_map.c

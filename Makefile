@@ -13,7 +13,8 @@ SRC = 	main.c			\
 		draw_line.c		\
 		linked_lst.c	\
 		plot_grid.c		\
-		draw.c
+		draw.c			\
+		grid_to_iso.c
 
 #Object files
 OBJ = $(SRC:.c=.o)

@@ -6,18 +6,18 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/06 16:11:28 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:30:39 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "linked_lst.h"
 
-t_map_point	*dbllst_new(int x, int y, int color, int value)
+t_matrix	*dbllst_new(int x, int y, int color, int value)
 {
-	t_map_point			*node;
+	t_matrix			*node;
 
-	node = malloc(sizeof(t_map_point));
+	node = malloc(sizeof(t_matrix));
 	if (!node)
 		return (NULL);
 	node->pos_x = x;
@@ -29,9 +29,9 @@ t_map_point	*dbllst_new(int x, int y, int color, int value)
 	return (node);
 }
 
-void	dbladd_back(t_map_point **lst, t_map_point *new)
+void	dbladd_back(t_matrix **lst, t_matrix *new)
 {
-	t_map_point	*current;
+	t_matrix	*current;
 
 	if (!new)
 		return ;
@@ -50,7 +50,7 @@ void	dbladd_back(t_map_point **lst, t_map_point *new)
 	}
 }
 
-int	dbllstsize(t_map_point *lst)
+int	dbllstsize(t_matrix *lst)
 {
 	int	size;
 
@@ -65,10 +65,10 @@ int	dbllstsize(t_map_point *lst)
 	return (size);
 }
 
-void	dbllstclear(t_map_point **lst)
+void	dbllstclear(t_matrix **lst)
 {
-	t_map_point	*current;
-	t_map_point	*next;
+	t_matrix	*current;
+	t_matrix	*next;
 
 	current = *lst;
 	while (current)

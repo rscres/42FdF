@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/12 21:03:31 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/14 20:06:38 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ unsigned int	atox(char *hex)
 	return (val);
 }
 
-void	data_setter(t_map_point **head, int j, int i, char **line)
+void	data_setter(t_matrix **head, int j, int i, char **line)
 {
 	unsigned int		color;
 	int					height;
@@ -73,7 +73,7 @@ void	data_setter(t_map_point **head, int j, int i, char **line)
 		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
 }
 
-void	matrix_creator(t_map_point **head, char	*buffer, t_map map)
+void	matrix_creator(t_matrix **head, char	*buffer, t_map map)
 {
 	char		**split_map;
 	char		**line;
@@ -97,20 +97,98 @@ void	matrix_creator(t_map_point **head, char	*buffer, t_map map)
 	free(split_map);
 }
 
+void	print(t_matrix ***head, t_map map)
+{
+	int	i = 0;
+	int j = 0;
+	t_matrix *current;
+
+	while (i < map.height)
+	{
+		current = (*head)[i];
+		j = 0;
+		while (j < map.width)
+		{
+			printf("%d\t", current->points.x);
+			j++;
+			current = current->next;
+		}
+		printf("\n");
+		i++;
+	}
+	printf("\n");
+}
+
+void	lst_walkback(t_matrix ***head, t_map map)
+{
+	int			i;
+	t_matrix	*current;
+
+	i = 0;
+	while (i < map.width)
+	{
+		current = (*head)[i];
+		int	j = 0;
+		while (j < map.width)
+		{
+			current = current->prev;
+			j++;
+		}
+		i++;
+	}
+}
+
+// void draw_lines(t_matrix **matrix, int width, int height) {
+//     for (int i = 0; i < height; i++) {
+//         t_matrix *current = matrix[i];
+//         t_matrix *nextRow = (i < height - 1) ? matrix[i + 1] : NULL;
+
+//         while (current) {
+//             t_matrix *next = current->next;
+
+//             // Draw line to the next point in the same row
+//             if (next) {
+//                 draw_line(current->points, next->points);
+//             }
+
+//             // Draw line to the point in the next row
+//             if (nextRow) {
+//                 t_matrix *nextInRow = nextRow;
+//                 while (nextInRow && nextInRow->pos_x < current->pos_x) {
+//                     nextInRow = nextInRow->next;
+//                 }
+//                 if (nextInRow && nextInRow->pos_x == current->pos_x) {
+//                     draw_line(current->points, nextInRow->points);
+//                 }
+//             }
+
+//             current = next;
+//         }
+//     }
+// }
+
 int	read_map(char *map_file, t_img *data)
 {
 	int			fd;
 	char		buffer[65535];
 	t_map		map;
-	t_map_point	**map_points;
+	t_matrix	**base_grid;
+	t_matrix	**iso_grid;
 
 	fd = open(map_file, O_RDONLY);
 	read(fd, buffer, 65535);
 	map_size(buffer, &map);
-	map_points = malloc(sizeof(t_map_point *) * map.height);
-	matrix_creator(map_points, buffer, map);
-	plot_grid(map, map_points);
-	draw(data, map, map_points);
+	base_grid = malloc(sizeof(t_matrix *) * map.height);
+	matrix_creator(base_grid, buffer, map);
+	plot_grid(map, base_grid);
+	print(&base_grid, map);
+	iso_grid = malloc(sizeof(t_matrix *) * map.height);
+	iso_grid = base_grid;
+	print(&iso_grid, map);
+	rotate_grid(&iso_grid, map);
+	// print(&iso_grid, map);
+
+	draw(data, map, iso_grid);
 	close(fd);
 	return (1);
 }

@@ -6,17 +6,17 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/13 12:47:38 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/14 15:40:27 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "linked_lst.h"
 
-static int	get_dist(t_map map, t_map_point **head)
+static int	get_dist(t_map map, t_matrix **head)
 {
 	int			dist;
-	t_map_point	*current;
+	t_matrix	*current;
 
 	current = head[0];
 	if (WINDOW_WIDTH / map.width >= WINDOW_HEIGHT / map.height)
@@ -28,13 +28,13 @@ static int	get_dist(t_map map, t_map_point **head)
 	return (dist);
 }
 
-void	plot_grid(t_map map, t_map_point **head)
+void	plot_grid(t_map map, t_matrix **head)
 {
 	int				dist;
 	int				i;
 	int				tmpx;
 	int				tmpy;
-	t_map_point		*current;
+	t_matrix		*current;
 
 	current = head[0];
 	dist = get_dist(map, head);
