@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/12 20:11:09 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/18 14:16:54 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,29 +28,20 @@ void	swap_(int *a, int *b)
 	*b = tmp;
 }
 
-int int_part_num(float x)
+int	int_part_num(float x)
 {
-    return (int)x;
+	return ((int)x);
 }
-
-// int	color_set(float gradient)
-// {
-	
-// }
 
 void	draw_line(t_img *data, t_point p1, t_point p2)
 {
-	int		steep;
-	t_delta	delta;
-	t_point	pxl;
-	float	intersect;
-	float	slope;
-	// int		color;
-	// int		color_step;
+	t_draw_info	info;
+	t_delta		delta;
+	int			x;
 
 	// printf("draw_line\n");
-	steep = abs_(p2.y - p1.y) > abs_(p2.x - p1.x);
-	if (steep)
+	info.steep = abs_(p2.y - p1.y) > abs_(p2.x - p1.x);
+	if (info.steep)
 	{
 		swap_(&p1.x, &p1.y);
 		swap_(&p2.x, &p2.y);
@@ -62,31 +53,31 @@ void	draw_line(t_img *data, t_point p1, t_point p2)
 	}
 	delta.x = p2.x - p1.x;
 	delta.y = p2.y - p1.y;
-	slope = delta.y / delta.x;
+	info.slope = delta.y / delta.x;
 	if (delta.x == 0.0)
-		slope = 1;
-	pxl.x = p1.x;
-	pxl.y = p2.x; // not really y, actually x2
-	intersect = p1.y;
-	if (steep)
+		info.slope = 1;
+	info.x1 = p1.x;
+	info.x2 = p2.x;
+	info.intersect = p1.y;
+	if (info.steep)
 	{
-		int x = pxl.x;
-		while (x <= pxl.y)
+		x = info.x1;
+		while (x <= info.x2)
 		{
-			my_mlx_pixel_put(data, int_part_num(intersect), x, 0x00FF0000);
+			my_mlx_pixel_put(data, int_part_num(info.intersect), x, 0x00FF0000);
 			// my_mlx_pixel_put(data, int_part_num(intersect) - 1, x, 0x00FF0000);
-			intersect += slope;
+			info.intersect += info.slope;
 			x++;
 		}
 	}
 	else
 	{
-		int x = pxl.x;
-		while (x <= pxl.y)
+		x = info.x1;
+		while (x <= info.x2)
 		{
-			my_mlx_pixel_put(data, x, int_part_num(intersect), 0x00FF0000);
+			my_mlx_pixel_put(data, x, int_part_num(info.intersect), 0x00FF0000);
 			// my_mlx_pixel_put(data, x, int_part_num(intersect) - 1, 0x00FF0000);
-			intersect += slope;
+			info.intersect += info.slope;
 			x++;
 		}
 	}

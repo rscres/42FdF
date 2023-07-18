@@ -6,12 +6,13 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/14 20:06:38 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/18 20:10:09 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "linked_lst.h"
+#include "transform.h"
 
 static void	map_size(char *buffer, t_map *map)
 {
@@ -73,7 +74,7 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
 }
 
-void	matrix_creator(t_matrix **head, char	*buffer, t_map map)
+void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 {
 	char		**split_map;
 	char		**line;
@@ -89,6 +90,10 @@ void	matrix_creator(t_matrix **head, char	*buffer, t_map map)
 		while (j < map.width)
 		{
 			data_setter(head, j, i, line);
+			if (head[i]->height > map.max_z)
+				map.max_z = head[i]->height;
+			if (head[i]->height < map.min_z)
+				map.min_z = head[i]->height;
 			j++;
 		}
 		free(line);
@@ -99,17 +104,19 @@ void	matrix_creator(t_matrix **head, char	*buffer, t_map map)
 
 void	print(t_matrix ***head, t_map map)
 {
-	int	i = 0;
-	int j = 0;
-	t_matrix *current;
+	int			i;
+	int			j;
+	t_matrix	*current;
 
+	i = 0;
+	j = 0;
 	while (i < map.height)
 	{
 		current = (*head)[i];
 		j = 0;
 		while (j < map.width)
 		{
-			printf("%d\t", current->points.x);
+			printf("%.2f\t", current->f_points.x);
 			j++;
 			current = current->next;
 		}
@@ -119,53 +126,33 @@ void	print(t_matrix ***head, t_map map)
 	printf("\n");
 }
 
-void	lst_walkback(t_matrix ***head, t_map map)
+void	normalize_range(t_map map, t_v3df *normalize)
 {
-	int			i;
-	t_matrix	*current;
-
-	i = 0;
-	while (i < map.width)
-	{
-		current = (*head)[i];
-		int	j = 0;
-		while (j < map.width)
-		{
-			current = current->prev;
-			j++;
-		}
-		i++;
-	}
+	normalize->x = ((float )map.width / (float )WINDOW_WIDTH) - 1.0;
+	normalize->y = ((float )map.height / (float )WINDOW_HEIGHT) - 1.0;
+	normalize->z = (map.max_z - map.min_z) / 2.0;
+	printf("x: %.4f\ty: %.4f\tz: %.4f\n", normalize->x, normalize->y, normalize->z);
 }
 
-// void draw_lines(t_matrix **matrix, int width, int height) {
-//     for (int i = 0; i < height; i++) {
-//         t_matrix *current = matrix[i];
-//         t_matrix *nextRow = (i < height - 1) ? matrix[i + 1] : NULL;
+void	normalize_grid(t_matrix ***head, t_map map)
+{
+	t_matrix	*current;
+	t_v3df		normalize;
 
-//         while (current) {
-//             t_matrix *next = current->next;
-
-//             // Draw line to the next point in the same row
-//             if (next) {
-//                 draw_line(current->points, next->points);
-//             }
-
-//             // Draw line to the point in the next row
-//             if (nextRow) {
-//                 t_matrix *nextInRow = nextRow;
-//                 while (nextInRow && nextInRow->pos_x < current->pos_x) {
-//                     nextInRow = nextInRow->next;
-//                 }
-//                 if (nextInRow && nextInRow->pos_x == current->pos_x) {
-//                     draw_line(current->points, nextInRow->points);
-//                 }
-//             }
-
-//             current = next;
-//         }
-//     }
-// }
+	normalize_range(map, &normalize);
+	for (int i = 0; i < map.height; i++)
+	{
+		current = (*head)[i];
+		while (current)
+		{
+			current->f_points.x = (current->pos_x / normalize.x) - 1.0;
+			current->f_points.y = (current->pos_y / normalize.y) - 1.0;
+			current->f_points.z = (current->height / normalize.z) - 1.0;
+			// printf("%f\n", current->f_points.x);
+			current = current->next;
+		}
+	}
+}
 
 int	read_map(char *map_file, t_img *data)
 {
@@ -180,15 +167,24 @@ int	read_map(char *map_file, t_img *data)
 	map_size(buffer, &map);
 	base_grid = malloc(sizeof(t_matrix *) * map.height);
 	matrix_creator(base_grid, buffer, map);
-	plot_grid(map, base_grid);
 	print(&base_grid, map);
+	// normalize(&base_grid, map);
+	center_grid(&base_grid, map);
 	iso_grid = malloc(sizeof(t_matrix *) * map.height);
 	iso_grid = base_grid;
 	print(&iso_grid, map);
 	rotate_grid(&iso_grid, map);
-	// print(&iso_grid, map);
-
+	print(&iso_grid, map);
+	plot_grid(map, iso_grid);
+	print(&iso_grid, map);
 	draw(data, map, iso_grid);
 	close(fd);
+	for (int i = 0; i < map.height; i++)
+	{
+		dbllstclear(&iso_grid[i]);
+		dbllstclear(&base_grid[i]);
+	}
+	dbllstclear(iso_grid);
+	dbllstclear(base_grid);
 	return (1);
 }

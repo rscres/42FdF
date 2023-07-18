@@ -11,10 +11,11 @@ CC_FLAGS = -Wall -Werror -Wextra -g3
 SRC = 	main.c			\
 		read_map.c		\
 		draw_line.c		\
-		linked_lst.c	\
+		lst_utils.c		\
 		plot_grid.c		\
 		draw.c			\
-		grid_to_iso.c
+		grid_to_iso.c	\
+		normalize.c		\
 
 #Object files
 OBJ = $(SRC:.c=.o)

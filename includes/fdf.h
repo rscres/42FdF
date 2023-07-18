@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/14 20:26:21 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/18 18:16:25 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,36 @@ typedef struct s_delta {
 }				t_delta;
 
 typedef struct s_map {
-	int	height;
-	int	width;
-	int	max_z;
-	int	min_z;
+	int		height;
+	int		width;
+	int		max_z;
+	int		min_z;
+	float	offset_x;
+	float	offset_y;
+	float	scale;
 }				t_map;
+
+typedef struct s_v3df {
+	float	x;
+	float	y;
+	float	z;
+}				t_v3df;
+
+typedef struct s_win
+{
+	void	*mlx_ptr;
+	void	*win_ptr;
+}				t_win;
+
+typedef struct s_draw_info {
+	float	intersect;
+	float	steep;
+	float	slope;
+	int		x1;
+	int		x2;
+	int		color;
+	int		color_step;
+}			t_draw_info;
 
 enum {
 	ON_KEYDOWN = 2,
@@ -61,7 +86,6 @@ enum {
 };
 
 //main.c
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //plot_matrix.c
 
@@ -71,6 +95,9 @@ int		read_map(char *map, t_img *data);
 
 //draw_line.c
 void	draw_line(t_img *data, t_point p1, t_point p2);
+
+//draw.c
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 
 

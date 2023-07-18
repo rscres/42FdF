@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   linked_lst.c                                       :+:      :+:    :+:   */
+/*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/14 15:30:39 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/18 15:39:48 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,24 @@ void	dbllstclear(t_matrix **lst)
 		current = next;
 	}
 	*lst = NULL;
+}
+
+void	lst_walkback(t_matrix ***head, t_map map)
+{
+	int			i;
+	int			j;
+	t_matrix	*current;
+
+	i = 0;
+	while (i < map.width)
+	{
+		current = (*head)[i];
+		j = 0;
+		while (j < map.width)
+		{
+			current = current->prev;
+			j++;
+		}
+		i++;
+	}
 }
