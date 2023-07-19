@@ -17,11 +17,14 @@ SRC = 	main.c			\
 		grid_to_iso.c	\
 		normalize.c		\
 
+#Source directory
+
+
 #Object files
 OBJ = $(SRC:.c=.o)
 
 #Libraries
-LIBS = -lmlx -Lget_next_line -lgetnextline -Llibft -lft -L/usr/lib -lXext -lX11 -lm -lz
+LIBS = -lmlx -Llibft -lft -L/usr/lib -lXext -lX11 -lm -lz
 
 all: $(NAME)
 

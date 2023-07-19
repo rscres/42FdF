@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/18 18:16:25 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:34:46 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # include <unistd.h>
 # include "libft/libft.h"
 
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 800
+# define WINDOW_HEIGHT 800
 
 typedef struct s_img {
 	void	*img;

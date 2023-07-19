@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 20:10:09 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 19:40:08 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static void	map_size(char *buffer, t_map *map)
 {
 	char	*temp;
 
+	if (!buffer && !*buffer)
+		return ;
 	temp = buffer;
 	map->height = 0;
-	while (*temp)
+	while (temp && *temp)
 	{
 		if (*temp == '\n')
 			map->height++;
@@ -87,22 +89,44 @@ void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 	{
 		line = ft_split(split_map[i], ' ');
 		j = 0;
+		head[i] = NULL;
 		while (j < map.width)
 		{
+			printf("%s\t", line[j]);
 			data_setter(head, j, i, line);
-			if (head[i]->height > map.max_z)
-				map.max_z = head[i]->height;
-			if (head[i]->height < map.min_z)
-				map.min_z = head[i]->height;
 			j++;
 		}
+		printf("\n");
 		free(line);
 		i++;
 	}
 	free(split_map);
 }
 
-void	print(t_matrix ***head, t_map map)
+void	get_z_offset(t_matrix ***head, t_map *map)
+{
+	t_matrix	*current;
+	int			i;
+
+	map->min_z = 0;
+	map->max_z = 0;
+	i = 0;
+	while (i < map->height)
+	{
+		current = (*head)[i];
+		while (current)
+		{
+			if (current->height < map->min_z)
+				map->min_z = current->height;
+			if (current->height > map->max_z)
+				map->max_z = current->height;
+			current = current->next;
+		}
+		i++;
+	}
+}
+
+void	print_f(t_matrix ***head, t_map map)
 {
 	int			i;
 	int			j;
@@ -117,6 +141,7 @@ void	print(t_matrix ***head, t_map map)
 		while (j < map.width)
 		{
 			printf("%.2f\t", current->f_points.x);
+			// printf("%d\t", current->points.x);
 			j++;
 			current = current->next;
 		}
@@ -126,33 +151,32 @@ void	print(t_matrix ***head, t_map map)
 	printf("\n");
 }
 
-void	normalize_range(t_map map, t_v3df *normalize)
+void	print_i(t_matrix ***head, t_map map)
 {
-	normalize->x = ((float )map.width / (float )WINDOW_WIDTH) - 1.0;
-	normalize->y = ((float )map.height / (float )WINDOW_HEIGHT) - 1.0;
-	normalize->z = (map.max_z - map.min_z) / 2.0;
-	printf("x: %.4f\ty: %.4f\tz: %.4f\n", normalize->x, normalize->y, normalize->z);
-}
-
-void	normalize_grid(t_matrix ***head, t_map map)
-{
+	int			i;
+	int			j;
 	t_matrix	*current;
-	t_v3df		normalize;
 
-	normalize_range(map, &normalize);
-	for (int i = 0; i < map.height; i++)
+	i = 0;
+	j = 0;
+	while (i < map.height)
 	{
 		current = (*head)[i];
-		while (current)
+		j = 0;
+		while (j < map.width)
 		{
-			current->f_points.x = (current->pos_x / normalize.x) - 1.0;
-			current->f_points.y = (current->pos_y / normalize.y) - 1.0;
-			current->f_points.z = (current->height / normalize.z) - 1.0;
-			// printf("%f\n", current->f_points.x);
+			// printf("%.2f\t", current->f_points.x);
+			printf("%d\t", current->points.x);
+			j++;
 			current = current->next;
 		}
+		printf("\n");
+		i++;
 	}
+	printf("\n");
 }
+
+char	status = 0;
 
 int	read_map(char *map_file, t_img *data)
 {
@@ -163,20 +187,26 @@ int	read_map(char *map_file, t_img *data)
 	t_matrix	**iso_grid;
 
 	fd = open(map_file, O_RDONLY);
-	read(fd, buffer, 65535);
+	if (fd < 0)
+		return (0);
+	ft_bzero(buffer, 65535);
+	if (read(fd, buffer, 65535) < 0)
+		return (0);
 	map_size(buffer, &map);
 	base_grid = malloc(sizeof(t_matrix *) * map.height);
 	matrix_creator(base_grid, buffer, map);
-	print(&base_grid, map);
+	get_z_offset(&base_grid, &map);
+	if (status) print_f(&base_grid, map);
 	// normalize(&base_grid, map);
 	center_grid(&base_grid, map);
 	iso_grid = malloc(sizeof(t_matrix *) * map.height);
 	iso_grid = base_grid;
-	print(&iso_grid, map);
+	if (status) print_f(&iso_grid, map);
 	rotate_grid(&iso_grid, map);
-	print(&iso_grid, map);
+	if (status) print_f(&iso_grid, map);
 	plot_grid(map, iso_grid);
-	print(&iso_grid, map);
+	if (status) printf("plot\n");
+	if (status) print_i(&iso_grid, map);
 	draw(data, map, iso_grid);
 	close(fd);
 	for (int i = 0; i < map.height; i++)

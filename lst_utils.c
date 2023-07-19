@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 15:39:48 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 18:40:31 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,14 @@ void	dbladd_back(t_matrix **lst, t_matrix *new)
 		return ;
 	if (*lst == NULL)
 	{
-		new->prev = NULL;
 		*lst = new;
+		return ;
 	}
-	else
-	{
-		current = *lst;
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new;
-		new->prev = current;
-	}
+	current = *lst;
+	while (current->next != NULL)
+		current = current->next;
+	new->prev = current;
+	current->next = new;
 }
 
 int	dbllstsize(t_matrix *lst)
