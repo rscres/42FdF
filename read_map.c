@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/19 19:40:08 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:26:09 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		dbladd_back(&head[i], dbllst_new(j, i, color, height));
 	}
 	else
-		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
+		dbladd_back(&head[i], dbllst_new(j, i, GREEN, ft_atoi(line[j])));
 }
 
 void	matrix_creator(t_matrix **head, char *buffer, t_map map)
@@ -92,7 +92,7 @@ void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 		head[i] = NULL;
 		while (j < map.width)
 		{
-			printf("%s\t", line[j]);
+			printf("%s ", line[j]);
 			data_setter(head, j, i, line);
 			j++;
 		}
@@ -141,7 +141,6 @@ void	print_f(t_matrix ***head, t_map map)
 		while (j < map.width)
 		{
 			printf("%.2f\t", current->f_points.x);
-			// printf("%d\t", current->points.x);
 			j++;
 			current = current->next;
 		}
@@ -165,7 +164,6 @@ void	print_i(t_matrix ***head, t_map map)
 		j = 0;
 		while (j < map.width)
 		{
-			// printf("%.2f\t", current->f_points.x);
 			printf("%d\t", current->points.x);
 			j++;
 			current = current->next;
@@ -175,8 +173,6 @@ void	print_i(t_matrix ***head, t_map map)
 	}
 	printf("\n");
 }
-
-char	status = 0;
 
 int	read_map(char *map_file, t_img *data)
 {
@@ -196,17 +192,11 @@ int	read_map(char *map_file, t_img *data)
 	base_grid = malloc(sizeof(t_matrix *) * map.height);
 	matrix_creator(base_grid, buffer, map);
 	get_z_offset(&base_grid, &map);
-	if (status) print_f(&base_grid, map);
-	// normalize(&base_grid, map);
 	center_grid(&base_grid, map);
 	iso_grid = malloc(sizeof(t_matrix *) * map.height);
 	iso_grid = base_grid;
-	if (status) print_f(&iso_grid, map);
 	rotate_grid(&iso_grid, map);
-	if (status) print_f(&iso_grid, map);
 	plot_grid(map, iso_grid);
-	if (status) printf("plot\n");
-	if (status) print_i(&iso_grid, map);
 	draw(data, map, iso_grid);
 	close(fd);
 	for (int i = 0; i < map.height; i++)

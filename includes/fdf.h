@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/19 19:34:46 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:15:57 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
+# include "color.h"
 
 # define WINDOW_WIDTH 800
 # define WINDOW_HEIGHT 800
@@ -74,6 +75,11 @@ typedef struct s_draw_info {
 	int		color;
 	int		color_step;
 }			t_draw_info;
+
+typedef struct s_color {
+	int		p1;
+	int		p2;
+}				t_color;
 
 enum {
 	ON_KEYDOWN = 2,

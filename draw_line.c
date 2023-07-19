@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 14:16:54 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/19 20:16:43 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	draw_line(t_img *data, t_point p1, t_point p2)
 	t_delta		delta;
 	int			x;
 
-	// printf("draw_line\n");
 	info.steep = abs_(p2.y - p1.y) > abs_(p2.x - p1.x);
 	if (info.steep)
 	{
@@ -64,7 +63,7 @@ void	draw_line(t_img *data, t_point p1, t_point p2)
 		x = info.x1;
 		while (x <= info.x2)
 		{
-			my_mlx_pixel_put(data, int_part_num(info.intersect), x, 0x00FF0000);
+			my_mlx_pixel_put(data, int_part_num(info.intersect), x, BLUE);
 			// my_mlx_pixel_put(data, int_part_num(intersect) - 1, x, 0x00FF0000);
 			info.intersect += info.slope;
 			x++;
@@ -75,7 +74,7 @@ void	draw_line(t_img *data, t_point p1, t_point p2)
 		x = info.x1;
 		while (x <= info.x2)
 		{
-			my_mlx_pixel_put(data, x, int_part_num(info.intersect), 0x00FF0000);
+			my_mlx_pixel_put(data, x, int_part_num(info.intersect), BLUE);
 			// my_mlx_pixel_put(data, x, int_part_num(intersect) - 1, 0x00FF0000);
 			info.intersect += info.slope;
 			x++;
