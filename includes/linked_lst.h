@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:17:06 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 20:05:52 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:41:04 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,9 @@ t_matrix	*dbllst_new(int x, int y, int color, int value);
 void		dbladd_back(t_matrix **lst, t_matrix *new);
 int			dbllstsize(t_matrix *lst);
 void		dbllstclear(t_matrix **lst);
+
+void		get_color(t_matrix ***head, t_map map);
+void		intermediate_color(t_matrix *current, t_map map);
+void		draw_line(t_img *data, t_matrix *current, t_matrix *next);
 
 #endif //LINKED_LST_H

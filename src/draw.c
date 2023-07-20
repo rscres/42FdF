@@ -6,11 +6,10 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:49:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 14:41:14 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:10:33 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
 #include "linked_lst.h"
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -38,9 +37,9 @@ void	draw(t_img *data, t_map map, t_matrix **head)
 		while (current != NULL)
 		{
 			if (current->next != NULL)
-				draw_line(data, current->points, current->next->points);
+				draw_line(data, current, current->next);
 			if (i != map.height - 1)
-				draw_line(data, current->points, next_line->points);
+				draw_line(data, current, next_line);
 			current = current->next;
 			if (!current)
 				break ;

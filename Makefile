@@ -8,14 +8,15 @@ CC = cc
 CC_FLAGS = -Wall -Werror -Wextra -g3
 
 #Source files
-SRC = 	main.c			\
-		read_map.c		\
-		draw_line.c		\
-		lst_utils.c		\
-		plot_grid.c		\
-		draw.c			\
-		grid_to_iso.c	\
-		normalize.c		\
+SRC = 	./src/main.c		\
+		./src/read_map.c	\
+		./src/draw_line.c	\
+		./src/lst_utils.c	\
+		./src/plot_grid.c	\
+		./src/draw.c		\
+		./src/grid_to_iso.c	\
+		./src/normalize.c	\
+		./src/color.c
 
 #Source directory
 
@@ -24,18 +25,25 @@ SRC = 	main.c			\
 OBJ = $(SRC:.c=.o)
 
 #Libraries
-LIBS = -lmlx -Llibft -lft -L/usr/lib -lXext -lX11 -lm -lz
+LIBS = -lmlx -Llibft -lft -lXext -lX11 -lm -lz
+
+#Libft
+LIBFT = ./libft/libft.a
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CC_FLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
 
+$(LIBFT):
+	@make -C libft
+
 clean:
 	rm -rf $(OBJ)
+	@make -C libft clean
 
 fclean: clean
 	rm -rf $(NAME)

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/19 20:15:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/20 13:20:51 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <stdio.h> //remove
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
@@ -95,16 +95,16 @@ enum {
 
 //plot_matrix.c
 
-
 //read_map.c
 int		read_map(char *map, t_img *data);
 
 //draw_line.c
-void	draw_line(t_img *data, t_point p1, t_point p2);
+
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
+//color.c
 
 
 #endif // FDF_H

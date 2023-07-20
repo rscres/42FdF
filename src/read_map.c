@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/19 20:26:09 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:23:58 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		dbladd_back(&head[i], dbllst_new(j, i, color, height));
 	}
 	else
-		dbladd_back(&head[i], dbllst_new(j, i, GREEN, ft_atoi(line[j])));
+		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
 }
 
 void	matrix_creator(t_matrix **head, char *buffer, t_map map)

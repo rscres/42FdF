@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:15:29 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/19 19:23:42 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/20 18:57:05 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	init_img(t_win *win, t_img *mlx_img)
 void	img_loop(t_win *win, t_img *mlx_img)
 {
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, mlx_img->img, 0, 0);
-	mlx_loop_hook(win->mlx_ptr, &handle_no_event, &win);
-	mlx_key_hook(win->win_ptr, &handle_key_input, &win);
-	mlx_hook(win->win_ptr, 17, 0, on_close, &win);
+	mlx_loop_hook(win->mlx_ptr, &handle_no_event, win);
+	mlx_key_hook(win->win_ptr, &handle_key_input, win);
+	mlx_hook(win->win_ptr, 17, 0, on_close, win);
 	mlx_loop(win->mlx_ptr);
 }
 
@@ -59,9 +59,14 @@ int main(int argc, char **argv)
 	t_win	win;
 	t_img	mlx_img;
 
-	if (argc != 2)
+	if (argc < 2)
 	{
-		printf("Error\n");
+		printf("Not enough arguments\n");
+		exit(1);
+	}
+	if (argc > 2)
+	{
+		printf("Too many arguments\n");
 		exit(1);
 	}
 	init_img(&win, &mlx_img);
