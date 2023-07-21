@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   draw_line_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 20:11:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 15:34:29 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/07/21 15:35:09 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/07/21 15:35:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "fdf.h"
+#include "linked_lst.h"
 
-# define RED	0xff3800
-# define ORANGE	0xffa000
-# define BLUE	0x0057cc
-# define GREEN	0x00cc44
-# define YELLOW	0xffe400
-# define GREY	0x91a3b0
+int	abs_(int x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
+}
 
-typedef struct s_color {
-	int	a;
-	int	r;
-	int	g;
-	int	b;
-}			t_color;
+void	swap_(int *a, int *b)
+{
+	int	tmp;
 
-typedef struct s_map_colors {
-	int	max_z;
-	int	min_z;
-	int	zero;
-}			t_map_colors;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
-#endif //COLOR_H
+int	int_part_num(float x)
+{
+	return ((int)x);
+}

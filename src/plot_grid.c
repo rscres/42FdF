@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/19 19:35:17 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:28:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,19 @@ void	plot_grid(t_map map, t_matrix **head)
 	int				dist;
 	int				i;
 	t_matrix		*current;
+	double			zoom;
 
 	dist = get_dist(map, head);
 	i = 0;
+	zoom = 1;
 	while (i < map.height)
 	{
 		current = head[i];
 		while (current != NULL)
 		{
-			current->points.x = (current->f_points.x * dist) + WINDOW_WIDTH / 2;
-			current->points.y = (current->f_points.y * dist)
+			current->points.x = (current->f_points.x * (dist * 0.8))
+				+ WINDOW_WIDTH / 2;
+			current->points.y = (current->f_points.y * (dist * 0.8))
 				+ WINDOW_HEIGHT / 2;
 			current->points.z = 0;
 			current = current->next;
@@ -48,3 +51,10 @@ void	plot_grid(t_map map, t_matrix **head)
 		i++;
 	}
 }
+
+// void	set_zoom(t_matrix ***head, t_map map)
+// {
+// 	t_matrix *current;
+	
+
+// }

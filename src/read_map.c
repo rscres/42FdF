@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 18:23:58 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:06:52 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		color = atox(values[1] + 2);
 		height = ft_atoi(values[0]);
 		dbladd_back(&head[i], dbllst_new(j, i, color, height));
+		free(values);
 	}
 	else
 		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
@@ -97,10 +98,25 @@ void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 			j++;
 		}
 		printf("\n");
-		free(line);
+		if (line)
+		{
+			j = 0;
+			while (*(line + j))
+				free(*(line + j++));
+			free(line);
+		}
 		i++;
 	}
-	free(split_map);
+	if (split_map)
+	{
+		j = 0;
+		while (*(split_map + j))
+		{
+			free(*(split_map + j));
+			j++;
+		}
+		free(split_map);
+	}
 }
 
 void	get_z_offset(t_matrix ***head, t_map *map)
@@ -126,54 +142,6 @@ void	get_z_offset(t_matrix ***head, t_map *map)
 	}
 }
 
-void	print_f(t_matrix ***head, t_map map)
-{
-	int			i;
-	int			j;
-	t_matrix	*current;
-
-	i = 0;
-	j = 0;
-	while (i < map.height)
-	{
-		current = (*head)[i];
-		j = 0;
-		while (j < map.width)
-		{
-			printf("%.2f\t", current->f_points.x);
-			j++;
-			current = current->next;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-}
-
-void	print_i(t_matrix ***head, t_map map)
-{
-	int			i;
-	int			j;
-	t_matrix	*current;
-
-	i = 0;
-	j = 0;
-	while (i < map.height)
-	{
-		current = (*head)[i];
-		j = 0;
-		while (j < map.width)
-		{
-			printf("%d\t", current->points.x);
-			j++;
-			current = current->next;
-		}
-		printf("\n");
-		i++;
-	}
-	printf("\n");
-}
-
 int	read_map(char *map_file, t_img *data)
 {
 	int			fd;
@@ -183,28 +151,27 @@ int	read_map(char *map_file, t_img *data)
 	t_matrix	**iso_grid;
 
 	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || !data)
 		return (0);
 	ft_bzero(buffer, 65535);
 	if (read(fd, buffer, 65535) < 0)
 		return (0);
 	map_size(buffer, &map);
 	base_grid = malloc(sizeof(t_matrix *) * map.height);
+	if (!base_grid)
+		return (0);
 	matrix_creator(base_grid, buffer, map);
 	get_z_offset(&base_grid, &map);
+	set_color(&base_grid, map);
 	center_grid(&base_grid, map);
-	iso_grid = malloc(sizeof(t_matrix *) * map.height);
 	iso_grid = base_grid;
 	rotate_grid(&iso_grid, map);
 	plot_grid(map, iso_grid);
 	draw(data, map, iso_grid);
 	close(fd);
 	for (int i = 0; i < map.height; i++)
-	{
-		dbllstclear(&iso_grid[i]);
 		dbllstclear(&base_grid[i]);
-	}
-	dbllstclear(iso_grid);
-	dbllstclear(base_grid);
+	if (base_grid)
+		free(base_grid);
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:50 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/03 18:37:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:24:13 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,10 @@ char	**ft_split(char const *s, char c)
 		ends((s + pos), c, &pos, &begin);
 		arr[i] = (char *)malloc((pos - begin + 1) * sizeof(char));
 		if (!arr[i])
+		{
+			arr[i] = NULL;
 			return (NULL);
+		}
 		ft_strlcpy(arr[i], (s + begin), (pos - begin + 1));
 		i++;
 	}

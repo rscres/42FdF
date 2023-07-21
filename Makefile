@@ -11,6 +11,7 @@ CC_FLAGS = -Wall -Werror -Wextra -g3
 SRC = 	./src/main.c		\
 		./src/read_map.c	\
 		./src/draw_line.c	\
+		./src/draw_line_utils.c\
 		./src/lst_utils.c	\
 		./src/plot_grid.c	\
 		./src/draw.c		\

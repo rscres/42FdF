@@ -6,13 +6,14 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 17:55:52 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:43:17 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "fdf.h"
 #include "linked_lst.h"
 
-int	color_step(int start, int end, int step, int max)
+int	color_steped(int start, int end, int step, int max)
 {
 	int		red;
 	int		green;
@@ -29,24 +30,42 @@ int	color_step(int start, int end, int step, int max)
 	return (color);
 }
 
-void	intermediate_color(t_matrix *current, t_map map)
+// void	intermediate_color(t_matrix *current, t_map map)
+// {
+// 	float	percent;
+
+// 	if (abs(map.max_z) > abs(map.min_z))
+// 		percent = ((current->height - map.min_z) * 1.0) / ((map.max_z - map.min_z) * 1.0);
+// 	else
+// 		percent = (current->height - map.max_z) * 1.0 / (map.min_z - map.max_z) * 1.0;
+// 	if (percent < 0.1)
+// 		current->color = current->prev->color;
+// 	else if (percent > 0.9 && current->next)
+// 		current->color = current->next->color;
+// 	else if (current->next)
+// 		current->color = percent * current->next->color;
+
+// }
+
+int	intermediate_color(int start, int end, double percent)
 {
-	float	percent;
+	int		result;
+	t_color	color1;
+	t_color	color2;
 
-	if (abs(map.max_z) > abs(map.min_z))
-		percent = ((current->height - map.min_z) * 1.0) / ((map.max_z - map.min_z) * 1.0);
-	else
-		percent = (current->height - map.max_z) * 1.0 / (map.min_z - map.max_z) * 1.0;
-	if (percent < 0.1)
-		current->color = current->prev->color;
-	else if (percent > 0.9 && current->next)
-		current->color = current->next->color;
-	else if (current->next)
-		current->color = percent * current->next->color;
-
+	color1.r = start >> 16 & 0xff;
+	color1.g = start >> 8 & 0xff;
+	color1.b = start & 0xff;
+	color2.r = end >> 16 & 0xff;
+	color2.g = end >> 8 & 0xff;
+	color2.b = end & 0xff;
+	result = (int)((color1.r * (1 - percent)) + color2.r * percent) << 16
+		| (int)((color1.g * (1 - percent)) + color2.g * percent) << 8
+		| (int)((color1.b * (1 - percent)) + color2.b * percent);
+	return (result);
 }
 
-void	get_color(t_matrix ***head, t_map map)
+void	set_color(t_matrix ***head, t_map map)
 {
 	t_matrix	*current;
 	int			i;
@@ -56,22 +75,27 @@ void	get_color(t_matrix ***head, t_map map)
 	while (i < map.height)
 	{
 		j = 0;
-		current = (*head)[i];
-		while (j < map.width)
+		current = (*head)[i++];
+		while (j++ < map.width)
 		{
-			if (current->height == map.min_z && map.min_z < 0
-				&& current->color == 0)
+			if (current && current->color != 0)
+			{
+				current = current->next;
+				continue ;
+			}
+			if (current->height == map.min_z && map.min_z < 0)
 				current->color = BLUE;
-			else if (current->height == map.max_z && (current->color == 0
-					|| current->color == GREY) && map.max_z > 0)
+			else if (current->height == map.max_z && map.max_z > 0)
 				current->color = RED;
-			else if (current->height == 0 && current->color == 0)
-				current->color = GREY;
-			else if (current->color == 0 && current->prev)
-				intermediate_color(current, map);
+			else if (current->height == 0)
+				current->color = GREEN;
+			else if (current->height > 0)
+				current->color = intermediate_color(GREEN, RED, (double)
+						(current->height * 100 / map.max_z) / 100);
+			else if (current->height < 0)
+				current->color = intermediate_color(GREEN, BLUE, (double)
+						(current->height * 100 / map.min_z) / 100);
 			current = current->next;
-			j++;
 		}
-		i++;
 	}
 }

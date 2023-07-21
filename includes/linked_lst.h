@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:17:06 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 13:41:04 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:20:45 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,9 @@ void		dbladd_back(t_matrix **lst, t_matrix *new);
 int			dbllstsize(t_matrix *lst);
 void		dbllstclear(t_matrix **lst);
 
-void		get_color(t_matrix ***head, t_map map);
-void		intermediate_color(t_matrix *current, t_map map);
+int			intermediate_color(int start, int end, double percent);
 void		draw_line(t_img *data, t_matrix *current, t_matrix *next);
+void		set_color(t_matrix ***head, t_map map);
+int			color_steped(int start, int end, int step, int max);
 
 #endif //LINKED_LST_H

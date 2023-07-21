@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:15:29 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 18:57:05 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:40:12 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	handle_key_input(int keysym, t_win *win)
 {
 	if (keysym == XK_Escape)
 	{
-		mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+		// mlx_destroy_window(win->mlx_ptr, win->win_ptr);
+		mlx_loop_end(win->mlx_ptr);
 		exit(0);
 	}
 	return (0);
@@ -59,7 +60,7 @@ int main(int argc, char **argv)
 	t_win	win;
 	t_img	mlx_img;
 
-	if (argc < 2)
+	if (argc < 2 || !argv)
 	{
 		printf("Not enough arguments\n");
 		exit(1);
@@ -72,6 +73,8 @@ int main(int argc, char **argv)
 	init_img(&win, &mlx_img);
 	read_map(argv[1], &mlx_img);
 	img_loop(&win, &mlx_img);
+	mlx_destroy_image(win.mlx_ptr, mlx_img.img);
+	mlx_destroy_window(win.mlx_ptr, win.win_ptr);
 	mlx_destroy_display(win.mlx_ptr);
 	free(win.mlx_ptr);
 	return (0);

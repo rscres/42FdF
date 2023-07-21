@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/20 13:20:51 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:15:54 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include "libft/libft.h"
 # include "color.h"
 
-# define WINDOW_WIDTH 800
+# define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
 
 typedef struct s_img {
@@ -51,7 +51,7 @@ typedef struct s_map {
 	int		min_z;
 	float	offset_x;
 	float	offset_y;
-	float	scale;
+	float	zoom;
 }				t_map;
 
 typedef struct s_v3df {
@@ -76,11 +76,6 @@ typedef struct s_draw_info {
 	int		color_step;
 }			t_draw_info;
 
-typedef struct s_color {
-	int		p1;
-	int		p2;
-}				t_color;
-
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -98,8 +93,10 @@ enum {
 //read_map.c
 int		read_map(char *map, t_img *data);
 
-//draw_line.c
-
+//draw_line_utils.c
+int		int_part_num(float x);
+void	swap_(int *a, int *b);
+int		abs_(int x);
 
 //draw.c
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);

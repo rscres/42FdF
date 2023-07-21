@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 13:21:16 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:55:33 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,13 +68,19 @@ void	dbllstclear(t_matrix **lst)
 	t_matrix	*next;
 
 	current = *lst;
-	while (current)
+	while (*lst)
 	{
-		next = current->next;
-		free(current);
-		current = next;
+		next = (*lst)->next;
+		free(*lst);
+		*lst = next;
 	}
-	*lst = NULL;
+	// while (current)
+	// {
+	// 	next = current->next;
+	// 	free(current);
+	// 	current = next;
+	// }
+	free(*lst);
 }
 
 void	lst_walkback(t_matrix ***head, t_map map)

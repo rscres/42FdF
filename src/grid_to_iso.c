@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:59 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/20 18:14:58 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 18:16:46 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	to_iso(t_matrix *current)
 	float	zoom;
 
 	theta = 150 * (M_PI / 180);
-	zoom = 0.8;
+	zoom = 1;
 	previous_x = current->f_points.x;
 	previous_y = current->f_points.y;
 	current->f_points.x = -((previous_x + previous_y) * zoom) * cos(theta);
-	current->f_points.y = -(current->f_points.z * 0.2) + ((previous_x
+	current->f_points.y = -(current->f_points.z * 0.25) + ((previous_x
 				- previous_y) * zoom) * sin(theta);
 }
 
