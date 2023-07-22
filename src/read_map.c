@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 20:06:52 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:36:51 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,7 @@ void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 		j = 0;
 		head[i] = NULL;
 		while (j < map.width)
-		{
-			printf("%s ", line[j]);
-			data_setter(head, j, i, line);
-			j++;
-		}
-		printf("\n");
+			data_setter(head, j++, i, line);
 		if (line)
 		{
 			j = 0;

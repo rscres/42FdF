@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 18:28:29 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:35:41 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,15 @@ void	plot_grid(t_map map, t_matrix **head)
 // 	t_matrix *current;
 	
 
+// }
+
+// void	initial_zoom(t_matrix ***head, t_map map)
+// {
+// 	t_matrix	*p1;
+// 	t_matrix	*p2;
+// 	int			dist_x;
+// 	int			dist_y;
+
+
+	
 // }

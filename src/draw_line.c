@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 18:04:50 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:42:08 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void	draw_line(t_img *data, t_matrix *current, t_matrix *next)
 	if (info.steep)
 	{
 		x = info.x1;
-		while (x <= info.x2)
+		while (x <= info.x2 && x >= 0)
 		{
+			// printf("%d: %#x\n ", x, info.color);
 			my_mlx_pixel_put(data, int_part_num(info.intersect), x, info.color);
 			// my_mlx_pixel_put(data, int_part_num(info.intersect) - 1, x, info.color);
 			info.intersect += info.slope;
@@ -63,8 +64,9 @@ void	draw_line(t_img *data, t_matrix *current, t_matrix *next)
 	else
 	{
 		x = info.x1;
-		while (x <= info.x2)
+		while (x <= info.x2 && x >= 0)
 		{
+			// printf("%d: %#x\n ", x, info.color);
 			my_mlx_pixel_put(data, x, int_part_num(info.intersect), info.color);
 			// my_mlx_pixel_put(data, x, int_part_num(info.intersect) - 1, info.color);
 			info.intersect += info.slope;
