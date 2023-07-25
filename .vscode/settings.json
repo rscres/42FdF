@@ -8,6 +8,7 @@
 		"ranges": "c",
 		"random": "c",
 		"cmath": "c",
-		"linked_lst.h": "c"
+		"linked_lst.h": "c",
+		"fdf.h": "c"
 	}
 }

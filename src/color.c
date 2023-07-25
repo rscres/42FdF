@@ -6,14 +6,14 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 19:43:17 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:15:42 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "linked_lst.h"
 
-int	color_steped(int start, int end, int step, int max)
+
+int	get_col_step(int start, int end, int step, int max)
 {
 	int		red;
 	int		green;
@@ -30,24 +30,7 @@ int	color_steped(int start, int end, int step, int max)
 	return (color);
 }
 
-// void	intermediate_color(t_matrix *current, t_map map)
-// {
-// 	float	percent;
-
-// 	if (abs(map.max_z) > abs(map.min_z))
-// 		percent = ((current->height - map.min_z) * 1.0) / ((map.max_z - map.min_z) * 1.0);
-// 	else
-// 		percent = (current->height - map.max_z) * 1.0 / (map.min_z - map.max_z) * 1.0;
-// 	if (percent < 0.1)
-// 		current->color = current->prev->color;
-// 	else if (percent > 0.9 && current->next)
-// 		current->color = current->next->color;
-// 	else if (current->next)
-// 		current->color = percent * current->next->color;
-
-// }
-
-int	intermediate_color(int start, int end, double percent)
+int	intermediate_color(int start, int end, float percent)
 {
 	int		result;
 	t_color	color1;
@@ -63,6 +46,22 @@ int	intermediate_color(int start, int end, double percent)
 		| (int)((color1.g * (1 - percent)) + color2.g * percent) << 8
 		| (int)((color1.b * (1 - percent)) + color2.b * percent);
 	return (result);
+}
+
+static void	set_color_loop(t_matrix *current, t_map map)
+{
+	if (current->height == map.min_z && map.min_z < 0)
+		current->color = BLUE;
+	else if (current->height == map.max_z && map.max_z > 0)
+		current->color = RED;
+	else if (current->height == 0)
+		current->color = GREEN;
+	else if (current->height > 0)
+		current->color = intermediate_color(GREEN, RED, (double)
+				(current->height * 100 / map.max_z) / 100);
+	else if (current->height < 0)
+		current->color = intermediate_color(GREEN, BLUE, (double)
+				(current->height * 100 / map.min_z) / 100);
 }
 
 void	set_color(t_matrix ***head, t_map map)
@@ -83,18 +82,7 @@ void	set_color(t_matrix ***head, t_map map)
 				current = current->next;
 				continue ;
 			}
-			if (current->height == map.min_z && map.min_z < 0)
-				current->color = BLUE;
-			else if (current->height == map.max_z && map.max_z > 0)
-				current->color = RED;
-			else if (current->height == 0)
-				current->color = GREEN;
-			else if (current->height > 0)
-				current->color = intermediate_color(GREEN, RED, (double)
-						(current->height * 100 / map.max_z) / 100);
-			else if (current->height < 0)
-				current->color = intermediate_color(GREEN, BLUE, (double)
-						(current->height * 100 / map.min_z) / 100);
+			set_color_loop(current, map);
 			current = current->next;
 		}
 	}

@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line_utils.c                                  :+:      :+:    :+:   */
+/*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 15:35:09 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:15:42 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/07/25 12:28:27 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/07/25 12:41:04 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef ERRORS_H
+# define ERRORS_H
 
 
-int	abs_(int x)
-{
-	if (x < 0)
-		return (-x);
-	return (x);
-}
 
-void	swap_(int *a, int *b)
-{
-	int	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-int	int_part_num(float x)
-{
-	return ((int)x);
-}
+#endif //ERRORS_H

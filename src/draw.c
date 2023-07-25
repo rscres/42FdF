@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 19:49:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 15:21:06 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:20:43 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "linked_lst.h"
+#include "fdf.h"
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {

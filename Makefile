@@ -16,8 +16,8 @@ SRC = 	./src/main.c		\
 		./src/plot_grid.c	\
 		./src/draw.c		\
 		./src/grid_to_iso.c	\
-		./src/normalize.c	\
-		./src/color.c
+		./src/color.c		\
+		./src/utils.c
 
 #Source directory
 
@@ -40,7 +40,7 @@ $(NAME): $(OBJ) $(LIBFT)
 	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
 
 $(LIBFT):
-	@make -C libft
+	@make -C libft 
 
 clean:
 	rm -rf $(OBJ)
@@ -48,5 +48,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	@make -C libft fclean
 
 re: fclean all

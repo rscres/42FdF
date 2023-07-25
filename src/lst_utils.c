@@ -6,12 +6,12 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 18:55:33 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:15:42 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "linked_lst.h"
+
 
 t_matrix	*dbllst_new(int x, int y, int color, int value)
 {

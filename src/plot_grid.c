@@ -6,12 +6,12 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 20:35:41 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 19:39:33 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "linked_lst.h"
+
 
 static int	get_dist(t_map map, t_matrix **head)
 {
@@ -35,18 +35,45 @@ void	plot_grid(t_map map, t_matrix **head)
 
 	dist = get_dist(map, head);
 	i = 0;
-	zoom = 1;
+	zoom = 1.3;
 	while (i < map.height)
 	{
 		current = head[i];
 		while (current != NULL)
 		{
-			current->points.x = (current->f_points.x * (dist * 0.8))
+			current->points.x = (current->f_points.x * (dist * zoom))
 				+ WINDOW_WIDTH / 2;
-			current->points.y = (current->f_points.y * (dist * 0.8))
+			current->points.y = (current->f_points.y * (dist * zoom))
 				+ WINDOW_HEIGHT / 2;
 			current->points.z = 0;
 			current = current->next;
+		}
+		i++;
+	}
+}
+
+void	center_grid(t_matrix ***head, t_map map)
+{
+	t_matrix	*current;
+	int			i;
+	int			j;
+
+	map.offset_x = (map.width - 1) / 2.0;
+	map.offset_y = (map.height - 1) / 2.0;
+
+	i = 0;
+	while (i < map.height)
+	{
+		j = 0;
+		current = (*head)[i];
+		while (j < map.width)
+		{
+			current->f_points.x = current->pos_x - map.offset_x;
+			current->f_points.y = -current->pos_y + map.offset_y;
+			current->f_points.z = current->height - ((map.max_z - map.min_z)
+					/ 2.0);
+			current = current->next;
+			j++;
 		}
 		i++;
 	}

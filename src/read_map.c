@@ -6,13 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 20:36:51 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 20:37:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "linked_lst.h"
-#include "transform.h"
 
 static void	map_size(char *buffer, t_map *map)
 {
@@ -24,7 +22,7 @@ static void	map_size(char *buffer, t_map *map)
 	map->height = 0;
 	while (temp && *temp)
 	{
-		if (*temp == '\n')
+		if (*temp == '\n' )
 			map->height++;
 		temp++;
 	}
@@ -36,27 +34,6 @@ static void	map_size(char *buffer, t_map *map)
 			map->width++;
 		temp++;
 	}
-}
-
-unsigned int	atox(char *hex)
-{
-	unsigned int	val;
-	__uint8_t		byte;
-
-	val = 0;
-	while (*hex)
-	{
-		byte = *hex;
-		if (byte >= '0' && byte <= '9')
-			byte = byte - '0';
-		else if (byte >= 'a' && byte <= 'f')
-			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <= 'F')
-			byte = byte - 'A' + 10;
-		val = (val << 4) | (byte & 0xF);
-		hex++;
-	}
-	return (val);
 }
 
 void	data_setter(t_matrix **head, int j, int i, char **line)
@@ -77,6 +54,14 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
 }
 
+static void	clear_array(char **line, int j)
+{
+	j = 0;
+	while (*(line + j))
+		free(*(line + j++));
+	free(line);
+}
+
 void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 {
 	char		**split_map;
@@ -94,23 +79,34 @@ void	matrix_creator(t_matrix **head, char *buffer, t_map map)
 		while (j < map.width)
 			data_setter(head, j++, i, line);
 		if (line)
-		{
-			j = 0;
-			while (*(line + j))
-				free(*(line + j++));
-			free(line);
-		}
+			clear_array(line, j);
 		i++;
 	}
 	if (split_map)
+		clear_array(split_map, j);
+}
+
+void	matrix_creator(t_matrix **head, int fd, t_map map)
+{
+	char	buffer[65535];
+	int		bytesread;
+	int		line;
+	int		j;
+
+	ft_bzero(buffer, 60000);
+	bytesread = read(fd, buffer, 65535);
+	if (read(fd, buffer, 60000) < 0)
+		return (0);
+	i = 0;
+	while (bytesread > 0)
 	{
-		j = 0;
-		while (*(split_map + j))
+		while (buffer)
 		{
-			free(*(split_map + j));
-			j++;
+			if (*buffer == '\n')
+				line++;
+			if (ft_isdigit(*buffer))
 		}
-		free(split_map);
+		bytesread = read(fd, buffer, 65535);
 	}
 }
 
@@ -137,10 +133,12 @@ void	get_z_offset(t_matrix ***head, t_map *map)
 	}
 }
 
-int	read_map(char *map_file, t_img *data)
+//Buffer size too big causes leaks and errors
+
+int	read_map(char *map_file, t_img *data, t_master)
 {
 	int			fd;
-	char		buffer[65535];
+	char		buffer[60000];
 	t_map		map;
 	t_matrix	**base_grid;
 	t_matrix	**iso_grid;
@@ -148,10 +146,6 @@ int	read_map(char *map_file, t_img *data)
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0 || !data)
 		return (0);
-	ft_bzero(buffer, 65535);
-	if (read(fd, buffer, 65535) < 0)
-		return (0);
-	map_size(buffer, &map);
 	base_grid = malloc(sizeof(t_matrix *) * map.height);
 	if (!base_grid)
 		return (0);

@@ -6,12 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:59 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/21 18:16:46 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/25 13:18:22 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include "linked_lst.h"
 
 void	to_iso(t_matrix *current)
 {

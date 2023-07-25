@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.h                                        :+:      :+:    :+:   */
+/*   keys.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/18 14:46:53 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/18 20:05:39 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/07/25 12:30:29 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/07/25 12:49:36 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRANSFORM_H
-# define TRANSFORM_H
+#ifndef KEYS_H
+# define KEYS_H
 
-# include "linked_lst.h"
+# define KEY_SPACE		0x20
+# define KEY_ESCAPE		0xff1b
+# define KEY_R			0x72
+# define KEY_T			0x74
+# define KEY_A			0x61
+# define KEY_D			0x64
+# define KEY_S			0x73
+# define KEY_W			0x77
+# define KEY_J			0x6a
+# define KEY_K			0x6b
+# define KEY_U			0x75
+# define KEY_I			0x69
 
-void	plot_grid(t_map map, t_matrix **head);
-void	draw(t_img *data, t_map map, t_matrix **map_point);
-void	rotate_grid(t_matrix ***result, t_map map);
-
-//normalize.c
-void	center_grid(t_matrix ***head, t_map map);
-void	normalize(t_matrix ***head, t_map map);
-
-#endif // TRANSFORM_H
+#endif //KEYS_H
