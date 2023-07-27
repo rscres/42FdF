@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:50 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/24 20:08:54 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/26 17:48:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,7 @@ char	**ft_split(char const *s, char c)
 			arr[i] = NULL;
 			return (NULL);
 		}
-		ft_strlcpy(arr[i], (s + begin), (pos - begin + 1));
-		i++;
+		ft_strlcpy(arr[i++], (s + begin), (pos - begin + 1));
 	}
 	arr[i] = NULL;
 	return (arr);

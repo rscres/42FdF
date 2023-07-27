@@ -26,28 +26,52 @@ SRC = 	./src/main.c		\
 OBJ = $(SRC:.c=.o)
 
 #Libraries
-LIBS = -lmlx -Llibft -lft -lXext -lX11 -lm -lz
+LIBS = -lmlx -Llibft -lft -Lft_printf -lftprintf -lXext -lX11 -lm -lz
 
 #Libft
 LIBFT = ./libft/libft.a
 
+#Ft_printf
+PRINTF = ./ft_printf/libftprintf.a
+
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT)
+$(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CC_FLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
 
 $(LIBFT):
-	@make -C libft 
+	@make -C libft
+
+$(PRINTF):
+	@make -C ft_printf
+
+clean_all:
+	rm -rf $(OBJ)
+	@make -C libft clean
+	@make -C ft_printf clean
+
+clean_lib:
+	@make -C libft clean
+	@make -C ft_printf clean
 
 clean:
 	rm -rf $(OBJ)
-	@make -C libft clean
+
+fclean_all: clean_all
+	rm -rf $(NAME)
+	@make -C libft fclean
+	@make -C ft_printf fclean
+
+fclean_lib: clean_libs
+	@make -C libft fclean
+	@make -C ft_printf fclean
 
 fclean: clean
 	rm -rf $(NAME)
-	@make -C libft fclean
+
+re_all: fclean_all all
 
 re: fclean all

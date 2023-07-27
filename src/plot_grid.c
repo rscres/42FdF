@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 19:39:33 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:49:26 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static int	get_dist(t_map map, t_matrix **head)
 	return (dist);
 }
 
-void	plot_grid(t_map map, t_matrix **head)
+void	plot_grid(t_matrix ***head, t_map map)
 {
 	int				dist;
 	int				i;
 	t_matrix		*current;
 	double			zoom;
 
-	dist = get_dist(map, head);
+	dist = get_dist(map, *head);
 	i = 0;
-	zoom = 1.3;
+	zoom = 0.7;
 	while (i < map.height)
 	{
-		current = head[i];
+		current = (*head)[i];
 		while (current != NULL)
 		{
 			current->points.x = (current->f_points.x * (dist * zoom))
@@ -79,20 +79,8 @@ void	center_grid(t_matrix ***head, t_map map)
 	}
 }
 
-// void	set_zoom(t_matrix ***head, t_map map)
+// void	plotter(t_master *master)
 // {
-// 	t_matrix *current;
-	
-
-// }
-
-// void	initial_zoom(t_matrix ***head, t_map map)
-// {
-// 	t_matrix	*p1;
-// 	t_matrix	*p2;
-// 	int			dist_x;
-// 	int			dist_y;
-
-
-	
+// 	center_grid(&master->matrix, master->map);
+// 	plot_grid(master->matrix, master->map);
 // }

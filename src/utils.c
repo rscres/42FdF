@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 18:53:21 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/24 19:08:48 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:48:37 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,17 @@ unsigned int	atox(char *hex)
 		hex++;
 	}
 	return (val);
+}
+
+void	clear_array(char **line)
+{
+	int	i;
+
+	i = 0;
+	while (*(line + i))
+	{
+		free(*(line + i));
+		i++;
+	}
+	free(line);
 }

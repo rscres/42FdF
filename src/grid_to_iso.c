@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:59 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:18:22 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:12:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	to_iso(t_matrix *current)
 				- previous_y) * zoom) * sin(theta);
 }
 
-void	rotate_grid(t_matrix ***result, t_map map)
+void	rotate_grid(t_matrix ***head, t_map map)
 {
 	t_matrix	*current;
 	int			i;
@@ -38,7 +38,7 @@ void	rotate_grid(t_matrix ***result, t_map map)
 	while (i < map.height)
 	{
 		j = 0;
-		current = (*result)[i];
+		current = (*head)[i];
 		while (j < map.width)
 		{
 			to_iso(current);

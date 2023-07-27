@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/25 13:16:46 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:49:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
+# include "libft/get_next_line.h"
+# include "ft_printf/ft_printf.h"
 # include "color.h"
 # include "keys.h"
 
@@ -35,32 +37,32 @@ typedef struct s_img {
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
-}				t_img;
+}	t_img;
 
 typedef struct s_win
 {
 	void	*mlx_ptr;
 	void	*win_ptr;
-}				t_win;
+}	t_win;
 
 //Vector coordinate structs: int and float versions
 typedef struct s_point {
 	int		x;
 	int		y;
 	int		z;
-}				t_point;
+}	t_point;
 
 typedef struct s_v3df {
 	float	x;
 	float	y;
 	float	z;
-}				t_v3df;
+}	t_v3df;
 
 //Delta struct
 typedef struct s_delta {
 	float	x;
 	float	y;
-}				t_delta;
+}	t_delta;
 
 //Map struct containing basic map info
 typedef struct s_map {
@@ -70,7 +72,7 @@ typedef struct s_map {
 	int		min_z;
 	float	offset_x;
 	float	offset_y;
-}				t_map;
+}	t_map;
 
 //Draw info struct contains info neededd to draw each line
 typedef struct s_draw_info {
@@ -81,7 +83,7 @@ typedef struct s_draw_info {
 	int		x1;
 	int		x2;
 	int		color;
-}			t_draw_info;
+}	t_draw_info;
 
 //Matrix struct contains each map point info
 typedef struct s_matrix {
@@ -93,7 +95,7 @@ typedef struct s_matrix {
 	unsigned int		color;
 	struct s_matrix		*next;
 	struct s_matrix		*prev;
-}				t_matrix;
+}	t_matrix;
 
 //Camera struct contains the info for the 
 typedef struct s_camera {
@@ -102,7 +104,7 @@ typedef struct s_camera {
 	int		offset_y;
 	int		rotation;
 	int		projection;
-}				t_camera;
+}	t_camera;
 
 //Master struct to nest other structs
 typedef struct s_master {
@@ -111,7 +113,7 @@ typedef struct s_master {
 	t_img		mlx_img;
 	t_map		map;
 	t_camera	camera;
-}				t_master;
+}	t_master;
 
 //Event enum
 enum {
@@ -138,22 +140,23 @@ void			set_color(t_matrix ***head, t_map map);
 int				get_col_step(int start, int end, int step, int max);
 
 //read_map.c
-int				read_map(char *map, t_img *data);
+int				read_map(char *map, t_master *master);
+void			get_z_offset(t_matrix ***head, t_map *map);
 
 //draw_line_utils.c
 int				int_part_num(float x);
-void			swap_(int *a, int *b);
-int				abs_(int x);
 
 //draw.c
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void			draw(t_img *data, t_map map, t_matrix **map_point);
 
 //utils.c
 unsigned int	atox(char *hex);
+void			clear_array(char **line);
 
-void			plot_grid(t_map map, t_matrix **head);
-void			draw(t_img *data, t_map map, t_matrix **map_point);
-void			rotate_grid(t_matrix ***result, t_map map);
+void			plotter(t_master *master);
+void			plot_grid(t_matrix ***head, t_map map);
+void			rotate_grid(t_matrix ***head, t_map map);
 void			center_grid(t_matrix ***head, t_map map);
 
 #endif // FDF_H

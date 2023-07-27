@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_line_utils.c                                  :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/21 15:35:09 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/26 18:00:03 by rseelaen         ###   ########.fr       */
+/*   Created: 2021/10/19 11:15:27 by jdecorte          #+#    #+#             */
+/*   Updated: 2023/07/27 12:01:02 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+# include <stdlib.h>
+# include <sys/types.h>
+# include <sys/uio.h>
+# include <unistd.h>
+# include "libft.h"
 
-int	int_part_num(float x)
-{
-	return ((int)x);
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 2048
+# endif //BUFFER_SIZE
+
+char	*get_next_line(int fd);
+
+#endif

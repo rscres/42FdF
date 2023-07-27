@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:05:47 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/10 12:54:28 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 17:17:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ void	ft_putchar_fd(char c, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
+
+// Misc functions
+int		ft_abs(int x);
+void	ft_swap(int *a, int *b);
 
 //BONUS PART
 // Struct declaration
