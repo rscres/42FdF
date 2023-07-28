@@ -8,9 +8,9 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c\
 	ft_tolower.c ft_toupper.c ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c\
 	ft_lstdelone.c ft_lstiter.c ft_lstlast.c\
 	ft_lstmap.c ft_lstnew.c ft_lstsize.c ft_abs.c ft_swap.c\
-	get_next_line.c
+	get_next_line_utils.c get_next_line.c
 CC = cc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g3
 NAME = libft.a
 OBJ = $(SRC:.c=.o)
 

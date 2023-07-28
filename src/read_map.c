@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/27 21:04:15 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 18:40:49 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,25 +107,23 @@ int	read_map(char *map_file, t_master *master)
 		}
 		if (split_line)
 			clear_array(split_line);
-		// if (j < master->map.width) //need to fix this loop
-		// {
-		// 	while (i < master->map.height)
-		// 	{
-		// 		if (i > j)
-		// 			continue ;
-		// 		dbllstclear(&master->matrix[i++]);
-		// 	}
-		// 	if (master->matrix)
-		// 		free(master->matrix);
-		// 	printf("Invalid map\n");
-		// 	exit(1);
-		// }
+		if (j != master->map.width)
+		{
+			while (i >= 0)
+			{
+				dbllstclear(&master->matrix[i]);
+				i--;
+			}
+			if (master->matrix)
+				free(master->matrix);
+			printf("Error: Invalid map\n");
+			return (1);
+		}
 		i++;
 	}
+	line = get_next_line(fd);
+	if (line)
+		free(line);
 	close(fd);
-	// for (i = 0; i < master->map.height; i++)
-	// 	dbllstclear(&master->matrix[i]);
-	// if (master->matrix)
-	// 	free(master->matrix);
-	return (1);
+	return (0);
 }

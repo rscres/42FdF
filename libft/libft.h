@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:05:47 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/27 17:17:01 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:49:25 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,26 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+# define MAX_FD 1024
 # define HEX_CAPS	"0123456789ABCDEF"
 # define HEX_LOW	"0123456789abcdef"
+
+//GNL
+typedef struct s_Struct
+{
+	char	*buffer;
+	size_t	len_b;
+	size_t	cap_b;
+}	t_List;
+
+char	*lst_find(t_List *lst, char number);
+int		lst_expand(t_List *lst);
+char	*lst_getslice(t_List *lst, size_t start, size_t end);
+// void	*ft_memmove(void *dest, const void *src, size_t n);
+char	*get_next_line(int fd);
 
 // Char functions
 int		ft_toupper(int a);

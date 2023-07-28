@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/26 17:54:05 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 12:12:32 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	draw_line(t_img *data, t_matrix *current, t_matrix *next)
 	p1.y = current->points.y;
 	p2.x = next->points.x;
 	p2.y = next->points.y;
+	// printf("p1.x = %d, p1.y = %d\n", p1.x, p1.y);
 	info.color = current->color;
 	info.col_step = 0;
 	if (current->height != next->height && current->color != next->color)

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:15:42 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 11:52:31 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,10 @@ int	dbllstsize(t_matrix *lst)
 
 void	dbllstclear(t_matrix **lst)
 {
-	t_matrix	*current;
+	// t_matrix	*current;
 	t_matrix	*next;
 
-	current = *lst;
+	// current = *lst;
 	while (*lst)
 	{
 		next = (*lst)->next;

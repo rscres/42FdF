@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2021/11/08 23:14:55 by jdecorte         ###   ########.fr       */
+/*   Updated: 2023/07/28 17:05:10 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+// #include "get_next_line.h"
+#include "libft.h"
 
 // join and free
 char	*ft_free(char *buffer, char *buf)
@@ -125,3 +126,74 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (line);
 }
+
+//-----------------gnl leon-----------------------------------------
+
+// static char	*memslice(char	*newline, t_List *lst, char *line)
+// {
+// 	line = lst_getslice(lst, 0, newline - lst->buffer + 1);
+// 	if (line == NULL)
+// 		return (NULL);
+// 	lst->len_b -= (newline + 1) - lst->buffer;
+// 	ft_memmove(lst->buffer, newline + 1, lst->len_b);
+// 	return (line);
+// }
+
+// static char	*lastslice(t_List *lst, char *line)
+// {
+// 	if (lst->len_b > 0)
+// 	{
+// 		line = lst_getslice(lst, 0, lst->len_b);
+// 		if (line == NULL)
+// 			return (NULL);
+// 		free(lst->buffer);
+// 		lst->buffer = NULL;
+// 		lst->len_b = 0;
+// 		lst = NULL;
+// 		return (line);
+// 	}
+// 	if (lst->buffer[0] == '\0')
+// 	{
+// 		free(lst->buffer);
+// 		lst->buffer = NULL;
+// 	}
+// 	return (NULL);
+// }
+
+// static char	*lst_create(t_List *lst)
+// {
+// 	if (lst->buffer == NULL)
+// 	{
+// 		lst->buffer = malloc(sizeof(char) * BUFFER_SIZE);
+// 		lst->buffer[0] = '\0';
+// 		lst->cap_b = BUFFER_SIZE;
+// 	}
+// 	return (lst->buffer);
+// }
+
+// char	*get_next_line(int fd)
+// {
+// 	static t_List		fileds[MAX_FD];
+// 	char				*newline;
+// 	t_List				*lst;
+// 	int					bytes;
+
+// 	if (fd < 0 || fd >= MAX_FD)
+// 		return (NULL);
+// 	lst = &fileds[fd];
+// 	lst->buffer = lst_create(lst);
+// 	while (lst)
+// 	{
+// 		newline = lst_find(lst, '\n');
+// 		if (newline != NULL)
+// 			return (memslice(newline, lst, NULL));
+// 		if (lst->len_b >= lst->cap_b && lst->buffer != NULL)
+// 			if (lst_expand(lst) == -1)
+// 				return (NULL);
+// 		bytes = read(fd, lst->buffer + lst->len_b, lst->cap_b - lst->len_b);
+// 		if (bytes == -1 || bytes == 0)
+// 			return (lastslice(lst, NULL));
+// 		lst->len_b += bytes;
+// 	}
+// 	return (NULL);
+// }

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/27 19:55:04 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 13:39:55 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
-# include "libft/get_next_line.h"
+// # include "libft/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 # include "color.h"
 # include "keys.h"
