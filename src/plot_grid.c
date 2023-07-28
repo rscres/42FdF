@@ -6,14 +6,14 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/27 19:49:26 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:58:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 
-static int	get_dist(t_map map, t_matrix **head)
+static int	get_dist(t_matrix **head, t_map map)
 {
 	int			dist;
 	t_matrix	*current;
@@ -33,7 +33,7 @@ void	plot_grid(t_matrix ***head, t_map map)
 	t_matrix		*current;
 	double			zoom;
 
-	dist = get_dist(map, *head);
+	dist = get_dist(*head, map);
 	i = 0;
 	zoom = 0.7;
 	while (i < map.height)

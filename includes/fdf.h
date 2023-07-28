@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/27 19:49:01 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 19:55:04 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,13 +130,13 @@ enum {
 //lst_utils.c
 t_matrix		*dbllst_new(int x, int y, int color, int value);
 void			dbladd_back(t_matrix **lst, t_matrix *new);
-int				dbllstsize(t_matrix *lst);
-void			dbllstclear(t_matrix **lst);	
+void			dbllstclear(t_matrix **lst);
+int				dbllstsize(t_matrix *lst);	
 
 //color.c
-int				intermediate_color(int start, int end, float percent);
 void			draw_line(t_img *data, t_matrix *current, t_matrix *next);
 void			set_color(t_matrix ***head, t_map map);
+int				intermediate_color(int start, int end, float percent);
 int				get_col_step(int start, int end, int step, int max);
 
 //read_map.c

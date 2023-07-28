@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/27 19:48:41 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/27 21:04:15 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,19 @@ int	read_map(char *map_file, t_master *master)
 		}
 		if (split_line)
 			clear_array(split_line);
+		// if (j < master->map.width) //need to fix this loop
+		// {
+		// 	while (i < master->map.height)
+		// 	{
+		// 		if (i > j)
+		// 			continue ;
+		// 		dbllstclear(&master->matrix[i++]);
+		// 	}
+		// 	if (master->matrix)
+		// 		free(master->matrix);
+		// 	printf("Invalid map\n");
+		// 	exit(1);
+		// }
 		i++;
 	}
 	close(fd);
