@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/28 20:21:55 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 21:32:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,14 @@ void	get_z_offset(t_matrix ***head, t_map *map)
 	}
 }
 
-void	get_map_height(t_master *master, int fd)
+void	get_map_height(t_master *master, char *map_file)
 {
 	char	*line;
+	int		fd;
 
+	fd = open(map_file, O_RDONLY);
+	if (fd < 0)
+		return ;
 	master->map.height = 0;
 	master->map.width = 0;
 	while (1)
@@ -69,6 +73,7 @@ void	get_map_height(t_master *master, int fd)
 		free(line);
 		master->map.height++;
 	}
+	close(fd);
 }
 
 int	read_map(char *map_file, t_master *master)
@@ -79,15 +84,11 @@ int	read_map(char *map_file, t_master *master)
 	char	**split_line;
 	int		j;
 
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		return (0);
 	i = 0;
-	get_map_height(master, fd);
+	get_map_height(master, map_file);
 	master->matrix = malloc(sizeof(t_matrix *) * master->map.height);
 	if (!master->matrix)
 		return (0);
-	close(fd);
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (0);
