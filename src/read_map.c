@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/28 18:40:49 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/28 20:21:55 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	data_setter(t_matrix **head, int j, int i, char **line)
 		color = atox(values[1] + 2);
 		height = ft_atoi(values[0]);
 		dbladd_back(&head[i], dbllst_new(j, i, color, height));
+		free(values[0]);
+		free(values[1]);
 		free(values);
 	}
 	else
