@@ -3,17 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 11:09:06 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/07/28 17:05:10 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/01 00:52:51 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "get_next_line.h"
 #include "libft.h"
 
-// join and free
 char	*ft_free(char *buffer, char *buf)
 {
 	char	*temp;
@@ -23,7 +21,6 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-// delete line find
 char	*ft_next(char *buffer)
 {
 	int		i;
@@ -31,49 +28,39 @@ char	*ft_next(char *buffer)
 	char	*line;
 
 	i = 0;
-	// find len of first line
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// if eol == \0 return NULL
 	if (!buffer[i])
 	{
 		free(buffer);
 		return (NULL);
 	}
-	// len of file - len of firstline + 1
 	line = ft_calloc((ft_strlen(buffer) - i + 1), sizeof(char));
 	i++;
 	j = 0;
-	// line == buffer
 	while (buffer[i])
 		line[j++] = buffer[i++];
 	free(buffer);
 	return (line);
 }
 
-// take line for return
 char	*ft_line(char *buffer)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	// if no line return NULL
 	if (!buffer[i])
 		return (NULL);
-	// go to the eol
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	// malloc to eol
 	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
-	// line = buffer
 	while (buffer[i] && buffer[i] != '\n')
 	{
 		line[i] = buffer[i];
 		i++;
 	}
-	// if eol is \0 or \n, replace eol by \n
 	if (buffer[i] && buffer[i] == '\n')
 		line[i++] = '\n';
 	return (line);
@@ -84,26 +71,20 @@ char	*read_file(int fd, char *res)
 	char	*buffer;
 	int		byte_read;
 
-	// malloc if res dont exist
 	if (!res)
 		res = ft_calloc(1, 1);
-	// malloc buffer
 	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	byte_read = 1;
 	while (byte_read > 0)
 	{
-		// while not eof read
 		byte_read = read(fd, buffer, BUFFER_SIZE);
 		if (byte_read == -1)
 		{
 			free(buffer);
 			return (NULL);
 		}
-		// 0 to end for leak
 		buffer[byte_read] = 0;
-		// join and free
 		res = ft_free(res, buffer);
-		// quit if \n find
 		if (ft_strchr(buffer, '\n'))
 			break ;
 	}
@@ -116,7 +97,6 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	// error handling
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buffer = read_file(fd, buffer);
@@ -126,74 +106,3 @@ char	*get_next_line(int fd)
 	buffer = ft_next(buffer);
 	return (line);
 }
-
-//-----------------gnl leon-----------------------------------------
-
-// static char	*memslice(char	*newline, t_List *lst, char *line)
-// {
-// 	line = lst_getslice(lst, 0, newline - lst->buffer + 1);
-// 	if (line == NULL)
-// 		return (NULL);
-// 	lst->len_b -= (newline + 1) - lst->buffer;
-// 	ft_memmove(lst->buffer, newline + 1, lst->len_b);
-// 	return (line);
-// }
-
-// static char	*lastslice(t_List *lst, char *line)
-// {
-// 	if (lst->len_b > 0)
-// 	{
-// 		line = lst_getslice(lst, 0, lst->len_b);
-// 		if (line == NULL)
-// 			return (NULL);
-// 		free(lst->buffer);
-// 		lst->buffer = NULL;
-// 		lst->len_b = 0;
-// 		lst = NULL;
-// 		return (line);
-// 	}
-// 	if (lst->buffer[0] == '\0')
-// 	{
-// 		free(lst->buffer);
-// 		lst->buffer = NULL;
-// 	}
-// 	return (NULL);
-// }
-
-// static char	*lst_create(t_List *lst)
-// {
-// 	if (lst->buffer == NULL)
-// 	{
-// 		lst->buffer = malloc(sizeof(char) * BUFFER_SIZE);
-// 		lst->buffer[0] = '\0';
-// 		lst->cap_b = BUFFER_SIZE;
-// 	}
-// 	return (lst->buffer);
-// }
-
-// char	*get_next_line(int fd)
-// {
-// 	static t_List		fileds[MAX_FD];
-// 	char				*newline;
-// 	t_List				*lst;
-// 	int					bytes;
-
-// 	if (fd < 0 || fd >= MAX_FD)
-// 		return (NULL);
-// 	lst = &fileds[fd];
-// 	lst->buffer = lst_create(lst);
-// 	while (lst)
-// 	{
-// 		newline = lst_find(lst, '\n');
-// 		if (newline != NULL)
-// 			return (memslice(newline, lst, NULL));
-// 		if (lst->len_b >= lst->cap_b && lst->buffer != NULL)
-// 			if (lst_expand(lst) == -1)
-// 				return (NULL);
-// 		bytes = read(fd, lst->buffer + lst->len_b, lst->cap_b - lst->len_b);
-// 		if (bytes == -1 || bytes == 0)
-// 			return (lastslice(lst, NULL));
-// 		lst->len_b += bytes;
-// 	}
-// 	return (NULL);
-// }

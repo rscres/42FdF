@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 13:28:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/28 11:52:31 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/31 20:37:38 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
 
 t_matrix	*dbllst_new(int x, int y, int color, int value)
 {
@@ -64,22 +63,14 @@ int	dbllstsize(t_matrix *lst)
 
 void	dbllstclear(t_matrix **lst)
 {
-	// t_matrix	*current;
 	t_matrix	*next;
 
-	// current = *lst;
 	while (*lst)
 	{
 		next = (*lst)->next;
 		free(*lst);
 		*lst = next;
 	}
-	// while (current)
-	// {
-	// 	next = current->next;
-	// 	free(current);
-	// 	current = next;
-	// }
 	free(*lst);
 }
 

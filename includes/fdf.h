@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/07/28 13:39:55 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/01 00:51:35 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,13 @@
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
-// # include "libft/get_next_line.h"
 # include "ft_printf/ft_printf.h"
 # include "color.h"
 # include "keys.h"
 
 //Window dimensions definition
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1600
+# define WINDOW_HEIGHT 1000
 
 //STRUCTS
 //MLX required info structs: img and win
@@ -138,6 +137,7 @@ void			draw_line(t_img *data, t_matrix *current, t_matrix *next);
 void			set_color(t_matrix ***head, t_map map);
 int				intermediate_color(int start, int end, float percent);
 int				get_col_step(int start, int end, int step, int max);
+int				set_transparency(int color, float transparency);
 
 //read_map.c
 int				read_map(char *map, t_master *master);

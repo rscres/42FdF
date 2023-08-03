@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/28 21:32:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/02 23:01:20 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,23 +76,14 @@ void	get_map_height(t_master *master, char *map_file)
 	close(fd);
 }
 
-int	read_map(char *map_file, t_master *master)
+static int	read_map_loop(int fd, t_master *master, int i, int j)
 {
-	int		fd;
 	char	*line;
-	int		i;
 	char	**split_line;
-	int		j;
+	int		invalid;
 
-	i = 0;
-	get_map_height(master, map_file);
-	master->matrix = malloc(sizeof(t_matrix *) * master->map.height);
-	if (!master->matrix)
-		return (0);
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-		return (0);
-	while (i < master->map.height)
+	invalid = 0;
+	while (i <= master->map.height)
 	{
 		j = 0;
 		line = get_next_line(fd);
@@ -111,22 +102,46 @@ int	read_map(char *map_file, t_master *master)
 		if (split_line)
 			clear_array(split_line);
 		if (j != master->map.width)
-		{
-			while (i >= 0)
-			{
-				dbllstclear(&master->matrix[i]);
-				i--;
-			}
-			if (master->matrix)
-				free(master->matrix);
-			printf("Error: Invalid map\n");
-			return (1);
-		}
+			invalid = 1;
 		i++;
+	}
+	if (invalid)
+	{
+		i = 0;
+		while (i < master->map.height)
+		{
+			dbllstclear(&master->matrix[i]);
+			i++;
+		}
+		printf("Error: Invalid map\n");
+		return (1);
 	}
 	line = get_next_line(fd);
 	if (line)
 		free(line);
+	return (0);
+}
+
+int	read_map(char *map_file, t_master *master)
+{
+	int		fd;
+	int		i;
+	int		j;
+
+	i = 0;
+	get_map_height(master, map_file);
+	master->matrix = malloc(sizeof(t_matrix *) * master->map.height);
+	if (!master->matrix)
+		return (0);
+	fd = open(map_file, O_RDONLY);
+	if (fd < 0)
+		return (0);
+	if (read_map_loop(fd, master, i, j))
+	{
+		close(fd);
+		free(master->matrix);
+		return (1);
+	}
 	close(fd);
 	return (0);
 }

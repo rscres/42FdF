@@ -54,8 +54,7 @@ clean_all:
 	@make -C ft_printf clean
 
 clean_lib:
-	@make -C libft clean
-	@make -C ft_printf clean
+	@make -C libft cleansrc/draw_line.c
 
 clean:
 	rm -rf $(OBJ)

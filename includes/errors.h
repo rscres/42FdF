@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   errors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 12:28:27 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 12:41:04 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/31 15:29:44 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ERRORS_H
 # define ERRORS_H
-
-
 
 #endif //ERRORS_H

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:15:29 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/28 16:52:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/02 22:57:09 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ int main(int argc, char **argv)
 		ft_printf("Error: Not valid extension\n");
 		exit(1);
 	}
-	init_img(&master.win, &master.mlx_img, argv[1]);
 	if (!read_map(argv[1], &master))
 	{
+		init_img(&master.win, &master.mlx_img, argv[1]);
 		get_z_offset(&master.matrix, &master.map);
 		set_color(&master.matrix, master.map);
 		center_grid(&master.matrix, master.map);
@@ -111,13 +111,17 @@ int main(int argc, char **argv)
 		plot_grid(&master.matrix, master.map);
 		draw(&master.mlx_img, master.map, master.matrix);
 		img_loop(&master.win, &master.mlx_img);
+		if (master.matrix)
+		{
+			for (int i = 0; i < master.map.height; i++)
+			{
+				dbllstclear(&master.matrix[i]);
+			}
+			if (master.matrix)
+				free(master.matrix);
+		}
+		destroy_win(&master);
 	}
-	for (int i = 0; i < master.map.height; i++)
-	{
-		dbllstclear(&master.matrix[i]);
-	}
-	if (master.matrix)
-		free(master.matrix);
-	destroy_win(&master);
+	
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:00:50 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/26 17:48:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:38:13 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ static void	ends(char const *s, char c, int *p, int *begin)
 	*p = end + 1;
 }
 
+static void	set_var(int *i, int *pos, int *begin)
+{
+	*i = 0;
+	*pos = 0;
+	*begin = 0;
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		i;
@@ -62,9 +69,7 @@ char	**ft_split(char const *s, char c)
 	arr = (char **)malloc((count + 1) * sizeof(char *));
 	if (!arr)
 		return (NULL);
-	pos = 0;
-	begin = 0;
-	i = 0;
+	set_var(&i, &pos, &begin);
 	while (i < count)
 	{
 		ends((s + pos), c, &pos, &begin);

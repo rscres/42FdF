@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/13 20:01:35 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/05/12 16:25:39 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/07/31 19:41:17 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	i = 0;
 	if (size == 0)
 		return (ft_strlen(src));
-	if (size < 0)
-		size = 1;
 	while (*(src + i) && i < size - 1)
 	{
 		*(dst + i) = *(src + i);

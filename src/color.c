@@ -3,15 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:15:42 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/01 01:13:44 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+int	set_transparency(int color, float transparency)
+{
+	int		alpha;
+	int		result;
+
+	alpha = (color >> 24) & 0xff;
+	alpha = transparency * 255;
+	result = (alpha << 24) | (color & 0xffffff);
+	return (result);
+}
 
 int	get_col_step(int start, int end, int step, int max)
 {
@@ -23,9 +33,9 @@ int	get_col_step(int start, int end, int step, int max)
 	red = (start >> 16) & 0xFF;
 	green = (start >> 8) & 0xFF;
 	blue = start & 0xFF;
-	red += ((end >> 16) & 0xFF - red) * step / max;
-	green += ((end >> 8) & 0xFF - green) * step / max;
-	blue += ((end) & 0xFF - blue) * step / max;
+	red += ((end >> 16) & (0xFF - red)) * step / max;
+	green += ((end >> 8) & (0xFF - green)) * step / max;
+	blue += ((end) & (0xFF - blue)) * step / max;
 	color = (red << 16) | (green << 8) | blue;
 	return (color);
 }
@@ -55,12 +65,12 @@ static void	set_color_loop(t_matrix *current, t_map map)
 	else if (current->height == map.max_z && map.max_z > 0)
 		current->color = RED;
 	else if (current->height == 0)
-		current->color = GREEN;
+		current->color = GREY;
 	else if (current->height > 0)
-		current->color = intermediate_color(GREEN, RED, (double)
+		current->color = intermediate_color(GREY, RED, (double)
 				(current->height * 100 / map.max_z) / 100);
 	else if (current->height < 0)
-		current->color = intermediate_color(GREEN, BLUE, (double)
+		current->color = intermediate_color(GREY, BLUE, (double)
 				(current->height * 100 / map.min_z) / 100);
 }
 
