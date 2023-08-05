@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/01 00:51:35 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/05 16:41:00 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "keys.h"
 
 //Window dimensions definition
-# define WINDOW_WIDTH 1600
-# define WINDOW_HEIGHT 1000
+# define WINDOW_WIDTH 1280
+# define WINDOW_HEIGHT 720
 
 //STRUCTS
 //MLX required info structs: img and win

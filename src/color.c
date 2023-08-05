@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/01 01:13:44 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/03 11:27:23 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,12 +65,12 @@ static void	set_color_loop(t_matrix *current, t_map map)
 	else if (current->height == map.max_z && map.max_z > 0)
 		current->color = RED;
 	else if (current->height == 0)
-		current->color = GREY;
+		current->color = GREEN;
 	else if (current->height > 0)
-		current->color = intermediate_color(GREY, RED, (double)
+		current->color = intermediate_color(GREEN, RED, (double)
 				(current->height * 100 / map.max_z) / 100);
 	else if (current->height < 0)
-		current->color = intermediate_color(GREY, BLUE, (double)
+		current->color = intermediate_color(GREEN, BLUE, (double)
 				(current->height * 100 / map.min_z) / 100);
 }
 

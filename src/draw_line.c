@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/04 16:16:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/31 17:49:02 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/03 11:23:40 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@ static void	draw_loop(t_draw_info *info, t_matrix *current, t_matrix *next,
 		{
 			my_mlx_pixel_put(data, int_part_num(info->intersect), x,
 				info->color);
-			info->color = intermediate_color(next->color, current->color,
-					info->intersect / 255);
+			info->color = current->color;
+			// info->color = intermediate_color(next->color, current->color,
+			// 		info->intersect / 255);
 		}
 		else
 		{
 			my_mlx_pixel_put(data, x, int_part_num(info->intersect),
 				info->color);
-			info->color = intermediate_color(current->color, next->color,
-					info->intersect / 255);
+			info->color = current->color;
+			// info->color = intermediate_color(current->color, next->color,
+			// 		info->intersect / 255);
 		}
+		info->color = next->color;
 		info->intersect += info->slope;
 		x++;
 	}

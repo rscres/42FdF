@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 18:53:21 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/27 19:48:37 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/05 19:22:00 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ unsigned int	atox(char *hex)
 	unsigned char	byte;
 
 	val = 0;
-	while (*hex)
+	hex = (hex + 2);
+	while (*hex && *hex != ' ' && *hex != '\n')
 	{
 		byte = *hex;
 		if (byte >= '0' && byte <= '9')
@@ -44,4 +45,13 @@ void	clear_array(char **line)
 		i++;
 	}
 	free(line);
+}
+
+void	init_camera(t_camera *camera)
+{
+	camera->zoom = 1;
+	camera->offset_x = 0;
+	camera->offset_y = 0;
+	camera->projection = 1;
+	camera->rotation = 0;
 }

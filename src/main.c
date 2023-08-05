@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/26 17:15:29 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/02 22:57:09 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/05 20:18:56 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,16 @@ void	init_img(t_win *win, t_img *mlx_img, char *argv)
 void	img_loop(t_win *win, t_img *mlx_img)
 {
 	mlx_put_image_to_window(win->mlx_ptr, win->win_ptr, mlx_img->img, 0, 0);
-	mlx_loop_hook(win->mlx_ptr, &handle_no_event, win);
+	mlx_destroy_image(win->mlx_ptr, mlx_img->img);
+	// mlx_loop_hook(win->mlx_ptr, &handle_no_event, win);
 	mlx_key_hook(win->win_ptr, &handle_key_input, win);
 	mlx_hook(win->win_ptr, 17, 0, on_close, win);
 	mlx_loop(win->mlx_ptr);
 }
 
-void	print_matrix(t_matrix ***head, t_map map)
-{
-	for (int i = 0; i < map.height; i++)
-	{
-		for (int j = 0; j < map.width; j++)
-		{
-			printf("%d\t", (*head)[i]->points.x);
-			if ((*head)[i]->next)
-				(*head)[i] = (*head)[i]->next;
-		}
-		printf("\n");
-	}
-	for (int i = map.height - 1; i >= 0; i--)
-	{
-		for (int j = map.height - 1; j >= 0; j--)
-		{
-			if ((*head)[i]->prev)
-				(*head)[i] = (*head)[i]->prev;
-		}
-	}
-}
-
 void	destroy_win(t_master *master)
 {
-	mlx_destroy_image(master->win.mlx_ptr, master->mlx_img.img);
+	// mlx_destroy_image(master->win.mlx_ptr, master->mlx_img.img);
 	mlx_destroy_window(master->win.mlx_ptr, master->win.win_ptr);
 	mlx_destroy_display(master->win.mlx_ptr);
 	free(master->win.mlx_ptr);
@@ -101,9 +80,9 @@ int main(int argc, char **argv)
 		ft_printf("Error: Not valid extension\n");
 		exit(1);
 	}
+	init_img(&master.win, &master.mlx_img, argv[1]);
 	if (!read_map(argv[1], &master))
 	{
-		init_img(&master.win, &master.mlx_img, argv[1]);
 		get_z_offset(&master.matrix, &master.map);
 		set_color(&master.matrix, master.map);
 		center_grid(&master.matrix, master.map);
@@ -120,8 +99,7 @@ int main(int argc, char **argv)
 			if (master.matrix)
 				free(master.matrix);
 		}
-		destroy_win(&master);
 	}
-	
+	destroy_win(&master);
 	return (0);
 }

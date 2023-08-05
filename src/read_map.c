@@ -3,34 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 17:11:36 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/02 23:01:20 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/05 19:51:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	data_setter(t_matrix **head, int j, int i, char **line)
-{
-	unsigned int		color;
-	int					height;
-	char				**values;
-
-	if (ft_strchr(line[j], ','))
-	{
-		values = ft_split(line[j], ',');
-		color = atox(values[1] + 2);
-		height = ft_atoi(values[0]);
-		dbladd_back(&head[i], dbllst_new(j, i, color, height));
-		free(values[0]);
-		free(values[1]);
-		free(values);
-	}
-	else
-		dbladd_back(&head[i], dbllst_new(j, i, 0, ft_atoi(line[j])));
-}
 
 void	get_z_offset(t_matrix ***head, t_map *map)
 {
@@ -64,7 +44,6 @@ void	get_map_height(t_master *master, char *map_file)
 	if (fd < 0)
 		return ;
 	master->map.height = 0;
-	master->map.width = 0;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -79,32 +58,74 @@ void	get_map_height(t_master *master, char *map_file)
 static int	read_map_loop(int fd, t_master *master, int i, int j)
 {
 	char	*line;
-	char	**split_line;
+	char	*temp;
 	int		invalid;
+	int		pos;
+	unsigned int		color;
+	int					height;
 
 	invalid = 0;
-	while (i <= master->map.height)
+	master->map.width = 0;
+	temp = NULL;
+	while (i < master->map.height)
 	{
-		j = 0;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
-		split_line = ft_split(line, ' ');
-		free(line);
-		master->matrix[i] = NULL;
-		while (split_line[j])
+		temp = line;
+		if (i == 0)
 		{
-			data_setter(master->matrix, j, i, split_line);
-			j++;
-			if (i == 0)
-				master->map.width++;
+			while (*temp != '\0')
+			{
+				if (*(temp) != ' ' && (*(temp + 1) == ' '
+						|| *(temp + 1) == '\0'))
+					master->map.width++;
+				temp++;
+			}
+			temp = line;
 		}
-		if (split_line)
-			clear_array(split_line);
+		master->matrix[i] = NULL;
+		j = 0;
+		while (*temp != '\0' && j < master->map.width)
+		{
+			pos = 0;
+			while (*(temp + pos) != ' ')
+			{
+				if (*(temp + pos) == ',')
+				{
+					height = ft_atoi(temp);
+					color = atox((temp + pos + 1));
+					dbladd_back(&master->matrix[i], dbllst_new(j, i,
+							color, height));
+					while (*(temp + pos) != ' ' && *(temp + pos) != '\0')
+						pos++;
+					temp = (temp + pos);
+					j++;
+					break ;
+				}
+				else if (*(temp + pos) != ' ')
+				{
+					dbladd_back(&master->matrix[i], dbllst_new(j, i, 0,
+							ft_atoi(temp)));
+					while (*(temp + pos) != ' ' && *(temp + pos) != '\0')
+						pos++;
+					temp = (temp + pos);
+					j++;
+					break ;
+				}
+				pos++;
+			}
+			temp++;
+		}
+		if (line)
+			free(line);
 		if (j != master->map.width)
 			invalid = 1;
 		i++;
 	}
+	line = get_next_line(fd);
+	if (line)
+		free(line);
 	if (invalid)
 	{
 		i = 0;
@@ -113,12 +134,10 @@ static int	read_map_loop(int fd, t_master *master, int i, int j)
 			dbllstclear(&master->matrix[i]);
 			i++;
 		}
+		mlx_destroy_image(master->win.mlx_ptr, master->mlx_img.img);
 		printf("Error: Invalid map\n");
 		return (1);
 	}
-	line = get_next_line(fd);
-	if (line)
-		free(line);
 	return (0);
 }
 
@@ -129,13 +148,14 @@ int	read_map(char *map_file, t_master *master)
 	int		j;
 
 	i = 0;
+	j = 0;
 	get_map_height(master, map_file);
 	master->matrix = malloc(sizeof(t_matrix *) * master->map.height);
 	if (!master->matrix)
-		return (0);
+		return (1);
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (1);
 	if (read_map_loop(fd, master, i, j))
 	{
 		close(fd);
