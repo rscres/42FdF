@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:15:27 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/07/27 12:01:02 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/08/06 13:53:05 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
-# include <stdlib.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <unistd.h>
-# include "libft.h"
+#include "fdf.h"
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 2048
-# endif //BUFFER_SIZE
+int	handle_key_input(int key, t_win *win)
+{
+	if (key == KEY_ESCAPE)
+	{
+		mlx_loop_end(win->mlx_ptr);
+		return (1);
+	}
+	return (0);
+}
 
-char	*get_next_line(int fd);
+int	on_close(t_win *win)
+{
+	mlx_loop_end(win->mlx_ptr);
+	return (0);
+}
 
-#endif
+int	handle_no_event(void)
+{
+	return (0);
+}

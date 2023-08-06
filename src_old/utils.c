@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/06 20:37:38 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/07/24 18:53:21 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/08/05 19:22:00 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-unsigned int	ft_atox(char *hex)
+unsigned int	atox(char *hex)
 {
 	unsigned int	val;
 	unsigned char	byte;
@@ -32,4 +32,26 @@ unsigned int	ft_atox(char *hex)
 		hex++;
 	}
 	return (val);
+}
+
+void	clear_array(char **line)
+{
+	int	i;
+
+	i = 0;
+	while (*(line + i))
+	{
+		free(*(line + i));
+		i++;
+	}
+	free(line);
+}
+
+void	init_camera(t_camera *camera)
+{
+	camera->zoom = 1;
+	camera->offset_x = 0;
+	camera->offset_y = 0;
+	camera->projection = 1;
+	camera->rotation = 0;
 }

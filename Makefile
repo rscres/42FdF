@@ -9,14 +9,10 @@ CC_FLAGS = -Wall -Werror -Wextra -g3
 
 #Source files
 SRC = 	./src/main.c		\
+		./src/img.c			\
+		./src/events.c		\
+		./src/validation.c	\
 		./src/read_map.c	\
-		./src/draw_line.c	\
-		./src/draw_line_utils.c\
-		./src/lst_utils.c	\
-		./src/plot_grid.c	\
-		./src/draw.c		\
-		./src/grid_to_iso.c	\
-		./src/color.c		\
 		./src/utils.c
 
 #Source directory

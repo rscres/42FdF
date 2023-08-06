@@ -1,35 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   validation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/06 20:37:38 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/08/06 13:21:17 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/08/06 13:22:17 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-unsigned int	ft_atox(char *hex)
+void	input_validation(char **argv, int argc)
 {
-	unsigned int	val;
-	unsigned char	byte;
-
-	val = 0;
-	hex = (hex + 2);
-	while (*hex && *hex != ' ' && *hex != '\n')
+	if (argc < 2 || !argv)
 	{
-		byte = *hex;
-		if (byte >= '0' && byte <= '9')
-			byte = byte - '0';
-		else if (byte >= 'a' && byte <= 'f')
-			byte = byte - 'a' + 10;
-		else if (byte >= 'A' && byte <= 'F')
-			byte = byte - 'A' + 10;
-		val = (val << 4) | (byte & 0xF);
-		hex++;
+		ft_printf("Error: Not enough arguments\n");
+		exit(1);
 	}
-	return (val);
+	if (argc > 2)
+	{
+		ft_printf("Error: Too many arguments\n");
+		exit(1);
+	}
+	if (!ft_strnstr(argv[1], ".fdf", ft_strlen(argv[1])))
+	{
+		ft_printf("Error: Not valid extension\n");
+		exit(1);
+	}
 }

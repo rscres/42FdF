@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/05 16:41:00 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/06 20:37:27 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,12 @@ typedef struct s_v3df {
 	float	z;
 }	t_v3df;
 
-//Delta struct
-typedef struct s_delta {
-	float	x;
-	float	y;
-}	t_delta;
-
 //Map struct containing basic map info
 typedef struct s_map {
 	int		height;
 	int		width;
 	int		max_z;
 	int		min_z;
-	float	offset_x;
-	float	offset_y;
 }	t_map;
 
 //Draw info struct contains info neededd to draw each line
@@ -87,13 +79,10 @@ typedef struct s_draw_info {
 //Matrix struct contains each map point info
 typedef struct s_matrix {
 	t_point				points;
-	t_v3df				f_points;
-	int					pos_x;
-	int					pos_y;
-	int					height;
+	int					x;
+	int					y;
+	int					z;
 	unsigned int		color;
-	struct s_matrix		*next;
-	struct s_matrix		*prev;
 }	t_matrix;
 
 //Camera struct contains the info for the 
@@ -126,37 +115,26 @@ enum {
 };
 
 //FUNCTIONS
-//lst_utils.c
-t_matrix		*dbllst_new(int x, int y, int color, int value);
-void			dbladd_back(t_matrix **lst, t_matrix *new);
-void			dbllstclear(t_matrix **lst);
-int				dbllstsize(t_matrix *lst);	
+//main.c
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-//color.c
-void			draw_line(t_img *data, t_matrix *current, t_matrix *next);
-void			set_color(t_matrix ***head, t_map map);
-int				intermediate_color(int start, int end, float percent);
-int				get_col_step(int start, int end, int step, int max);
-int				set_transparency(int color, float transparency);
+//events.c
+int				handle_key_input(int key, t_win *win);
+int				on_close(t_win *win);
+int				handle_no_event(void);
+
+//img.c
+void			init_img(t_win *win, t_img *mlx_img, char *argv);
+void			img_loop(t_win *win, t_master master);
+void			destroy_win(t_master *master);
+
+//validation.c
+void			input_validation(char **argv, int argc);
 
 //read_map.c
-int				read_map(char *map, t_master *master);
-void			get_z_offset(t_matrix ***head, t_map *map);
-
-//draw_line_utils.c
-int				int_part_num(float x);
-
-//draw.c
-void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
-void			draw(t_img *data, t_map map, t_matrix **map_point);
+int				read_map(t_master *master, char *map_file);
 
 //utils.c
-unsigned int	atox(char *hex);
-void			clear_array(char **line);
-
-void			plotter(t_master *master);
-void			plot_grid(t_matrix ***head, t_map map);
-void			rotate_grid(t_matrix ***head, t_map map);
-void			center_grid(t_matrix ***head, t_map map);
+unsigned int	ft_atox(char *hex);
 
 #endif // FDF_H

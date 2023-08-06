@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 21:05:47 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/03 18:15:25 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/06 19:50:19 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 4096
 # endif
-# define MAX_FD 1024
+# define FD_MAX 1024
 # define HEX_CAPS	"0123456789ABCDEF"
 # define HEX_LOW	"0123456789abcdef"
 
