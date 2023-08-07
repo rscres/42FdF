@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/06 20:37:27 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:39:20 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_draw_info {
 	int		x1;
 	int		x2;
 	int		color;
+	t_point	delta;
 }	t_draw_info;
 
 //Matrix struct contains each map point info
@@ -136,5 +137,12 @@ int				read_map(t_master *master, char *map_file);
 
 //utils.c
 unsigned int	ft_atox(char *hex);
+void			clear_array(t_matrix **matrix, t_map map);
+
+//draw.c
+int				draw(t_master *master);
+
+//color.c
+void			set_color(t_matrix **matrix, t_map map);
 
 #endif // FDF_H

@@ -13,7 +13,9 @@ SRC = 	./src/main.c		\
 		./src/events.c		\
 		./src/validation.c	\
 		./src/read_map.c	\
-		./src/utils.c
+		./src/utils.c		\
+		./src/draw.c		\
+		./src/color.c
 
 #Source directory
 

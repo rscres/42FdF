@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/07 20:04:42 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 20:09:36 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,3 @@ int	draw(t_master *master)
 		master->mlx_img.img, 0, 0);
 	return (0);
 }
-

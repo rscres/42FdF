@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/06 13:53:05 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:14:37 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,5 @@ int	handle_key_input(int key, t_win *win)
 int	on_close(t_win *win)
 {
 	mlx_loop_end(win->mlx_ptr);
-	return (0);
-}
-
-int	handle_no_event(void)
-{
 	return (0);
 }

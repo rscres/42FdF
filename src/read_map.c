@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:39:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/07 16:19:51 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 19:00:07 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,14 @@ void	get_map_dimension(t_map *map, int fd)
 	free(line);
 }
 
+void	get_z(int z, t_map *map)
+{
+	if (z > map->max_z)
+		map->max_z = z;
+	else if (z < map->min_z)
+		map->min_z = z;
+}
+
 void	set_point(t_matrix *matrix, int x, int y, char *split_line)
 {
 	matrix->x = x;
@@ -57,8 +65,10 @@ void	set_coords(t_matrix **matrix, t_map map, int fd)
 	char	*line;
 	char	**split_line;
 
-	y = 0;
-	while (y <= map.height)
+	y = -1;
+	map.max_z = 0;
+	map.min_z = 0;
+	while (++y <= map.height)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -67,11 +77,13 @@ void	set_coords(t_matrix **matrix, t_map map, int fd)
 		free(line);
 		x = -1;
 		while (split_line[++x])
+		{
 			set_point(&matrix[y][x], x, y, *(split_line + x));
+			get_z(matrix[y][x].z, &map);
+		}
 		while (x >= 0)
 			free(split_line[x--]);
 		free(split_line);
-		y++;
 	}
 }
 

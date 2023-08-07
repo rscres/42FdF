@@ -6,11 +6,12 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/10 18:50:19 by cado-car          #+#    #+#             */
-/*   Updated: 2023/08/06 18:51:28 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 20:14:34 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 ssize_t	read_file(int fd, char **buffer, char **buff_read, char **line);
 char	*get_line(char **buff_read, char **line);
 
@@ -77,7 +78,10 @@ char	*get_next_line(int fd)
 		buff_read[fd] = ft_strdup("");
 	n = read_file(fd, &buffer, &buff_read[fd], &line);
 	if (n == 0 && !line)
+	{
+		free(buffer);
 		return (NULL);
+	}
 	return (line);
 }
 

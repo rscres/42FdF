@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:20:23 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/06 16:49:06 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 14:13:32 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,9 @@ void	init_img(t_win *win, t_img *mlx_img, char *argv)
 			&mlx_img->line_length, &mlx_img->endian);
 }
 
-int	draw_img(t_master *master)
-{
-	my_mlx_pixel_put(&master->mlx_img, 199, 199, RED);
-	mlx_put_image_to_window(master->win.mlx_ptr, master->win.win_ptr,
-		master->mlx_img.img, 0, 0);
-	return (0);
-}
-
 void	img_loop(t_win *win, t_master master)
 {
-	mlx_expose_hook(win->win_ptr, &draw_img, &master);
+	mlx_expose_hook(win->win_ptr, &draw, &master);
 	mlx_key_hook(win->win_ptr, &handle_key_input, win);
 	mlx_hook(win->win_ptr, 17, 0, on_close, win);
 	mlx_loop(win->mlx_ptr);
