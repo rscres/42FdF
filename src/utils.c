@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/06 20:37:38 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/07 13:17:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,17 @@ unsigned int	ft_atox(char *hex)
 		hex++;
 	}
 	return (val);
+}
+
+void	clear_array(t_matrix **matrix, t_map map)
+{
+	int	i;
+
+	i = 0;
+	while (i < map.height)
+	{
+		free(matrix[i]);
+		i++;
+	}
+	free(matrix);
 }
