@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/08 14:58:18 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:41:24 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 
 int	draw(t_master *master)
 {
-	
+	transform(master);
 	my_mlx_pixel_put(&master->mlx_img, 199, 199, RED);
 	mlx_put_image_to_window(master->win.mlx_ptr, master->win.win_ptr,
 		master->mlx_img.img, 0, 0);

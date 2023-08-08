@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/08 14:58:36 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:02:28 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,12 @@ typedef struct s_v3df {
 	float	y;
 	float	z;
 }	t_v3df;
+
+//Line struct
+typedef struct s_line {
+	t_point	start;
+	t_point	end;
+}	t_line;
 
 //Map struct containing basic map info
 typedef struct s_map {
@@ -146,6 +152,6 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void			set_color(t_matrix **matrix, t_map map);
 
 //transform.c
-void			transform(t_master master);
+void			transform(t_master *master);
 
 #endif // FDF_H
