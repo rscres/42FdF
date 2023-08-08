@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 20:11:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/07/25 13:12:58 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 15:05:13 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ typedef struct s_color {
 }			t_color;
 
 typedef struct s_map_colors {
-	int	max_z;
-	int	min_z;
+	int	max;
+	int	min;
 	int	zero;
 }			t_map_colors;
 

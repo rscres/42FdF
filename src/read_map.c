@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:39:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/07 19:00:07 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:49:45 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	set_point(t_matrix *matrix, int x, int y, char *split_line)
 		matrix->color = 0;
 }
 
-void	set_coords(t_matrix **matrix, t_map map, int fd)
+void	set_coords(t_matrix **matrix, t_map *map, int fd)
 {
 	int		x;
 	int		y;
@@ -66,9 +66,9 @@ void	set_coords(t_matrix **matrix, t_map map, int fd)
 	char	**split_line;
 
 	y = -1;
-	map.max_z = 0;
-	map.min_z = 0;
-	while (++y <= map.height)
+	map->max_z = 0;
+	map->min_z = 0;
+	while (++y <= map->height)
 	{
 		line = get_next_line(fd);
 		if (!line)
@@ -79,7 +79,7 @@ void	set_coords(t_matrix **matrix, t_map map, int fd)
 		while (split_line[++x])
 		{
 			set_point(&matrix[y][x], x, y, *(split_line + x));
-			get_z(matrix[y][x].z, &map);
+			get_z(matrix[y][x].z, map);
 		}
 		while (x >= 0)
 			free(split_line[x--]);
@@ -109,7 +109,7 @@ int	read_map(t_master *master, char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (1);
-	set_coords(master->matrix, master->map, fd);
+	set_coords(master->matrix, &master->map, fd);
 	close(fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/07 19:39:20 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:58:36 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ enum {
 
 //FUNCTIONS
 //main.c
-void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //events.c
 int				handle_key_input(int key, t_win *win);
@@ -141,8 +140,12 @@ void			clear_array(t_matrix **matrix, t_map map);
 
 //draw.c
 int				draw(t_master *master);
+void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //color.c
 void			set_color(t_matrix **matrix, t_map map);
+
+//transform.c
+void			transform(t_master master);
 
 #endif // FDF_H

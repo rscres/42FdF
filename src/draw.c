@@ -6,11 +6,21 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/07 20:09:36 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/08 14:58:18 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+{
+	char	*dst;
+
+	if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
+		return ;
+	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
+	*(unsigned int *)dst = color;
+}
 
 // void	drawline(int x0, int y0, int x1, int y1, t_master master)
 // {
@@ -38,30 +48,32 @@
 // 	}
 // }
 
-// void drawAntialiasedLine(t_point start, t_point end)
+// void draw_line(t_matrix start, t_matrix end)
 // {
-// 	int dx = end.x - start.x;
-// 	int dy = end.y - start.y;
+// 	t_draw_info	info;
+// 	t_matrix	temp;
 
-// 	if (ft_abs(dx) > ft_abs(dy))
+// 	info.delta.x = end.x - start.x;
+// 	info.delta.y = end.y - start.y;
+// 	if (ft_abs(info.delta.x) > ft_abs(info.delta.y))
 // 	{
 // 		if (start.x > end.x)
 // 		{
-// 			t_point temp = start;
+// 			temp = start;
 // 			start = end;
 // 			end = temp;
-// 			dx = -dx;
-// 			dy = -dy;
+// 			info.delta.x = -info.delta.x;
+// 			info.delta.y = -info.delta.y;
 // 		}
-// 		float gradient = (float)dy / dx;
+// 		info.slope = (float)info.delta.y / info.delta.x;
 // 		// First endpoint
 // 		my_mlx_pixel_put(start.x, start.y, 1.0);
-// 		float y = start.y + gradient;
+// 		float y = start.y + info.slope;
 // 		for (int x = start.x + 1; x < end.x; x++)
 // 		{
 // 			my_mlx_pixel_put(x, (int)y, 1.0 - (y - floor(y)));
 // 			my_mlx_pixel_put(x, (int)y + 1, y - floor(y));
-// 			y += gradient;
+// 			y += info.slope;
 // 		}
 // 		// Last endpoint
 // 		my_mlx_pixel_put(end.x, end.y, 1.0);
@@ -73,18 +85,18 @@
 // 			t_point temp = start;
 // 			start = end;
 // 			end = temp;
-// 			dx = -dx;
-// 			dy = -dy;
+// 			info.delta.x = -info.delta.x;
+// 			info.delta.y = -info.delta.y;
 // 		}
-// 		float gradient = (float)dx / dy;
+// 		float info.slope = (float)info.delta.x / info.delta.y;
 // 		// First endpoint
 // 		my_mlx_pixel_put(start.x, start.y, 1.0);
-// 		float x = start.x + gradient;
+// 		float x = start.x + info.slope;
 // 		for (int y = start.y + 1; y < end.y; y++)
 // 		{
 // 			my_mlx_pixel_put((int)x, y, 1.0 - (x - floor(x)));
 // 			my_mlx_pixel_put((int)x + 1, y, x - floor(x));
-// 			x += gradient;
+// 			x += info.slope;
 // 		}
 // 		// Last endpoint
 // 		my_mlx_pixel_put(end.x, end.y, 1.0);
@@ -93,7 +105,7 @@
 
 int	draw(t_master *master)
 {
-	set_color(master->matrix, master->map);
+	
 	my_mlx_pixel_put(&master->mlx_img, 199, 199, RED);
 	mlx_put_image_to_window(master->win.mlx_ptr, master->win.win_ptr,
 		master->mlx_img.img, 0, 0);
