@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/08 18:02:28 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/09 20:57:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ typedef struct s_v3df {
 typedef struct s_line {
 	t_point	start;
 	t_point	end;
+	int		color_start;
+	int		color_end;
 }	t_line;
 
 //Map struct containing basic map info
@@ -85,7 +87,7 @@ typedef struct s_draw_info {
 
 //Matrix struct contains each map point info
 typedef struct s_matrix {
-	t_point				points;
+	t_v3df				f_point;
 	int					x;
 	int					y;
 	int					z;
@@ -146,6 +148,7 @@ void			clear_array(t_matrix **matrix, t_map map);
 
 //draw.c
 int				draw(t_master *master);
+void			draw_line(t_matrix start, t_matrix end, t_img *mlx_img);
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //color.c
@@ -153,5 +156,8 @@ void			set_color(t_matrix **matrix, t_map map);
 
 //transform.c
 void			transform(t_master *master);
+
+//draw_line.c
+void			draw_line_old(t_img *data, t_matrix *current, t_matrix *next);
 
 #endif // FDF_H

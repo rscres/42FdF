@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   grid_to_iso.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 14:00:59 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/01 00:55:11 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/09 11:34:13 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	to_iso(t_matrix *current)
+void	to_iso(t_matrix *current, t_camera cam)
 {
 	float	previous_x;
 	float	previous_y;
 	float	theta;
 
-	theta = 150 * (M_PI / 180);
-	previous_x = current->f_points.x;
-	previous_y = current->f_points.y;
-	current->f_points.x = -(previous_x + previous_y) * cos(theta);
-	current->f_points.y = -(current->f_points.z * 0.25) + (previous_x
+	theta = cam.rotation * (M_PI / 180);
+	previous_x = current->x;
+	previous_y = current->y;
+	current->x = -(previous_x + previous_y) * cos(theta);
+	current->y = -(current->z * 0.25) + (previous_x
 			- previous_y) * sin(theta);
 }
 
