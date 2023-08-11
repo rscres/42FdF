@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/11 17:38:25 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:50:23 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,32 +21,6 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
 }
-
-// void	draw_line(t_matrix start, t_matrix end, t_img *mlx_img)
-// {
-// 	int dx, dy, p, x, y;
-
-// 	dx = end.x - start.x;
-// 	dy = start.y - start.y;
-// 	x = start.x;
-// 	y = start.y;
-// 	p = 2 * dy - dx;
-// 	while (x < end.x)
-// 	{
-// 		if (p >= 0)
-// 		{
-// 			my_mlx_pixel_put(mlx_img, x, y, start.color);
-// 			y = y + 1;
-// 			p = p + 2 * dy - 2 * dx;
-// 		}
-// 		else
-// 		{
-// 			my_mlx_pixel_put(mlx_img, x, y, start.color);
-// 			p = p + 2 * dy;
-// 		}
-// 		x = x + 1;
-// 	}
-// }
 
 void draw_line(t_matrix start, t_matrix end, t_img *mlx_img)
 {
