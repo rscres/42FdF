@@ -16,8 +16,7 @@ SRC = 	./src/main.c		\
 		./src/utils.c		\
 		./src/draw.c		\
 		./src/color.c		\
-		./src/transform.c	\
-		./src/draw_line.c
+		./src/transform.c
 
 #Source directory
 

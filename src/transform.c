@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:05:18 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/09 21:04:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/11 17:58:36 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,29 +35,35 @@ static int	get_dist(t_map map)
 	return (dist);
 }
 
+void	to_iso(t_matrix *point)
+{
+	float	theta;
+
+	theta = 50 * (M_PI / 180.0);
+	point->f_point.x = (point->f_point.x - point->f_point.y) * cos(theta);
+	point->f_point.y = (point->f_point.x + point->f_point.y) * sin(theta)
+		- (point->f_point.z * 0.25);
+}
+
 void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_img *mlx_img,
 	t_map map)
 {
-	float	theta;
-	int		temp_x;
-	int		dist;
+	int			dist;
+	t_matrix	start_tmp;
+	t_matrix	end_tmp;
 
-	theta = cam.rotation * (M_PI / 180);
+	start_tmp = start;
+	end_tmp = end;
 	dist = get_dist(map);
-	center(&start, map);
-	center(&end, map);
-	temp_x = start.f_point.x;
-	start.f_point.x = -(temp_x + start.y) * cos(theta);
-	start.f_point.y = -(start.f_point.z * 0.25) + (temp_x - start.f_point.y) * sin(theta);
-	temp_x = end.f_point.x;
-	end.f_point.x = -(temp_x + end.f_point.y) * cos(theta);
-	end.f_point.y = -(end.f_point.z * 0.25) + (temp_x - end.f_point.y) * sin(theta);
-	start.x = (start.f_point.x * dist) + cam.offset_x;
-	start.y = (start.f_point.y * dist) + cam.offset_y;
-	end.x = (end.f_point.x * dist) + cam.offset_x;
-	end.y = (end.f_point.y * dist) + cam.offset_y;
-	printf("%d,%d\t", start.x, start.y);
-	draw_line_old(mlx_img, &start, &end);
+	center(&start_tmp, map);
+	center(&end_tmp, map);
+	to_iso(&start_tmp);
+	to_iso(&end_tmp);
+	start_tmp.x = (start_tmp.f_point.x * dist) + cam.offset_x;
+	start_tmp.y = (start_tmp.f_point.y * dist) + cam.offset_y;
+	end_tmp.x = (end_tmp.f_point.x * dist) + cam.offset_x;
+	end_tmp.y = (end_tmp.f_point.y * dist) + cam.offset_y;
+	draw_line(start_tmp, end_tmp, mlx_img);
 }
 
 void	transform(t_master *master)
@@ -73,17 +79,15 @@ void	transform(t_master *master)
 		{
 			if (master->camera.projection == 1)
 			{
-				// printf("%d\t", master->matrix[y][x].x);
 				if (x != master->map.width - 1)
 					iso_tf(master->matrix[y][x], master->matrix[y][x + 1],
 						master->camera, &master->mlx_img, master->map);
-				if (y != master->map.height - 1)	
+				if (y != master->map.height - 1)
 					iso_tf(master->matrix[y][x], master->matrix[y + 1][x],
 						master->camera, &master->mlx_img, master->map);
 			}
 			x++;
 		}
-		printf("\n");
 		y++;
 	}
 }

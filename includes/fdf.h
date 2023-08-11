@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/09 20:57:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/11 18:00:00 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@
 # include "keys.h"
 
 //Window dimensions definition
-# define WINDOW_WIDTH 1280
-# define WINDOW_HEIGHT 720
+# define WINDOW_WIDTH 900
+# define WINDOW_HEIGHT 900
 
 //STRUCTS
 //MLX required info structs: img and win
@@ -153,11 +153,9 @@ void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 //color.c
 void			set_color(t_matrix **matrix, t_map map);
+int				interpolate_color(t_matrix start, t_matrix end, int x);
 
 //transform.c
 void			transform(t_master *master);
-
-//draw_line.c
-void			draw_line_old(t_img *data, t_matrix *current, t_matrix *next);
 
 #endif // FDF_H
