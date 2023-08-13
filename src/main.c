@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:22:54 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/08 14:59:39 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/13 19:12:43 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ int	main(int argc, char **argv)
 	if (!read_map(&master, argv[1]))
 	{
 		init_cam(&master.camera);
+		printf("%f\n", master.camera.zoom);
+		initial_zoom(master.matrix, &master.camera, master.map);
+		printf("%f\n", master.camera.zoom);
 		set_color(master.matrix, master.map);
 		img_loop(&master.win, master);
 	}

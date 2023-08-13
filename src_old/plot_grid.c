@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:31:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/05 18:25:54 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:00:59 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ void	plot_grid(t_matrix ***head, t_map map)
     t_matrix		*current;
     double			zoom;
     float			iso_angle = 50.0f; // replace with your isometric angle in degrees
-    // int				tile_width = TILE_WIDTH; // replace with your tile width
-    // int				tile_height = TILE_HEIGHT; // replace with your tile height
     float			iso_radians = iso_angle * M_PI / 180.0f;
     float			max_x = 0;
     float			max_y = 0;

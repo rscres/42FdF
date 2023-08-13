@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/11 18:00:00 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/13 18:05:35 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,5 +157,9 @@ int				interpolate_color(t_matrix start, t_matrix end, int x);
 
 //transform.c
 void			transform(t_master *master);
+int				get_dist(t_map map);
+
+//scale.c
+void			initial_zoom(t_matrix **matrix, t_camera *cam, t_map map);
 
 #endif // FDF_H
