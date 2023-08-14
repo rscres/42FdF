@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:39:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/11 20:11:35 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/14 17:53:49 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,15 @@ void	set_coords(t_matrix **matrix, t_map *map, int fd)
 		{
 			set_point(&matrix[y][x], x, y, *(split_line + x));
 			get_z(matrix[y][x].z, map);
+		}
+		if (x != map->width)
+		{
+			x = 0;
+			while (x < map->width && split_line[x])
+				free(split_line[x++]);
+			free(split_line);
+			ft_putstr("Error: map is not well formatted\n");
+			exit (1);
 		}
 		while (x >= 0)
 			free(split_line[x--]);
