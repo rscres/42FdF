@@ -6,7 +6,7 @@
 /*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:39:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/14 17:53:49 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/15 15:17:24 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	set_point(t_matrix *matrix, int x, int y, char *split_line)
 	matrix->x = x;
 	matrix->y = y;
 	matrix->z = ft_atoi(split_line);
+	printf("%s\n", split_line);
 	if (ft_strchr(split_line, ','))
 		matrix->color = ft_atox((ft_strchr(split_line, ',') + 1));
 	else
@@ -76,7 +77,7 @@ void	set_coords(t_matrix **matrix, t_map *map, int fd)
 		split_line = ft_split(line, ' ');
 		free(line);
 		x = -1;
-		while (split_line[++x])
+		while (split_line[++x] && x < map->width)
 		{
 			set_point(&matrix[y][x], x, y, *(split_line + x));
 			get_z(matrix[y][x].z, map);

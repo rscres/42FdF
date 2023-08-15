@@ -6,7 +6,7 @@
 /*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:59:15 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/14 21:15:42 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/14 22:28:25 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	set_min_max(t_v3df *max, t_v3df *min, t_v3df *cur)
 		min->y = cur->y;
 }
 
-void	set_zoom(t_v3df max, t_v3df min, t_camera *cam)
+static void	set_zoom(t_v3df max, t_v3df min, t_camera *cam)
 {
 	if (WINDOW_WIDTH / (max.x - min.x) < WINDOW_HEIGHT / (max.y - min.y))
 		cam->zoom = (WINDOW_WIDTH / (max.x - min.x)) * 1.3;
@@ -67,4 +67,8 @@ void	initial_zoom(t_matrix **matrix, t_camera *cam, t_map map)
 		}
 	}
 	set_zoom(max, min, cam);
+	// cam->offset_x = ft_abs(((WINDOW_WIDTH / 2) - (max.x - min.x)) / 2);
+	// cam->offset_y = ft_abs(((WINDOW_HEIGHT / 2) - (max.y - min.y)) / 2);
+	printf("offset_x = %d\n", cam->offset_x);
+	printf("offset_y = %d\n", cam->offset_y);
 }
