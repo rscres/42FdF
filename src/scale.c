@@ -3,69 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:59:15 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/13 20:24:48 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/14 21:15:42 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	init_min_max(t_v3df *max, t_v3df *min)
+{
+	max->x = 0;
+	max->y = 0;
+	min->x = 0;
+	min->y = 0;
+}
+
+static void	set_min_max(t_v3df *max, t_v3df *min, t_v3df *cur)
+{
+	if (cur->x > max->x)
+		max->x = cur->x;
+	if (cur->y > max->y)
+		max->y = cur->y;
+	if (cur->x < min->x)
+		min->x = cur->x;
+	if (cur->y < min->y)
+		min->y = cur->y;
+}
+
+void	set_zoom(t_v3df max, t_v3df min, t_camera *cam)
+{
+	if (WINDOW_WIDTH / (max.x - min.x) < WINDOW_HEIGHT / (max.y - min.y))
+		cam->zoom = (WINDOW_WIDTH / (max.x - min.x)) * 1.3;
+	else
+		cam->zoom = (WINDOW_HEIGHT / (max.y - min.y)) * 1.3;
+	if (cam->zoom == 0)
+		cam->zoom = 1;
+}
 
 void	initial_zoom(t_matrix **matrix, t_camera *cam, t_map map)
 {
 	t_v3df	max;
 	t_v3df	min;
 	t_v3df	cur;
-	int		y;
-	int		x;
+	t_point	pos;
 	float	theta;
 
 	theta = 55 * (M_PI / 180.0);
-	max.x = 0;
-	max.y = 0;
-	min.x = 0;
-	min.y = 0;
-	y = 0;
-	while (y < map.height)
+	init_min_max(&max, &min);
+	pos.y = -1;
+	while (++pos.y < map.height)
 	{
-		x = 0;
-		while (x < map.width)
+		pos.x = -1;
+		while (++pos.x < map.width)
 		{
-			cur.x = (matrix[y][x].x - matrix[y][x].y) * (get_dist(map)
-					* cam->zoom * cos(theta)) + cam->offset_x;
-			cur.y = (matrix[y][x].x + matrix[y][x].y) * (get_dist(map)
-					* cam->zoom * sin(theta)) - (matrix[y][x].z * 0.25) + cam->offset_y;
-			if (cur.x > max.x)
-				max.x = cur.x;
-			if (cur.y > max.y)
-				max.y = cur.y;
-			if (cur.x < min.x)
-				min.x = cur.x;
-			if (cur.y < min.y)
-				min.y = cur.y;
-			x++;
+			cur.x = (matrix[pos.y][pos.x].x - matrix[pos.y][pos.x].y)
+				* (get_dist(map) * cam->zoom * cos(theta));
+			cur.y = (matrix[pos.y][pos.x].x + matrix[pos.y][pos.x].y)
+				* (get_dist(map) * cam->zoom * sin(theta))
+				- (matrix[pos.y][pos.x].z * 0.25);
+			set_min_max(&max, &min, &cur);
 		}
-		y++;
 	}
-	printf("x:%f\t%f\n", max.x, min.x);
-	printf("y:%f\t%f\n", max.y, min.y);
-	cur.x = (WINDOW_WIDTH / 2.0f) + ((max.x - min.x) / 2.0f + min.x);
-	cur.y = (WINDOW_HEIGHT / 2.0f) + ((max.y - min.y) / 4.0f + min.y);
-	printf("cur:%f\t%f\n", cur.x, cur.y);
-	if ((max.x - min.x) < (max.y - min.y))
-	{
-		printf("there\n");
-		cam->zoom = ((max.x - min.x) / cur.x);
-	}
-	else
-	{
-		printf("here\n");
-		cam->zoom = ((max.y - min.y) / cur.y);
-	}
-	if (cam->zoom == 0)
-		cam->zoom = 1;
-	cam->offset_x = cur.x / 2.0;
-	cam->offset_y = cur.y / 3.0;
-	printf("cur:%d\t%d\n", cam->offset_x, cam->offset_y);
+	set_zoom(max, min, cam);
 }
