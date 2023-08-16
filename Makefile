@@ -1,6 +1,9 @@
 #Program name
 NAME = fdf
 
+#Bonus program name
+BONUS_NAME = fdf_bonus
+
 #Compiler
 CC = cc
 
@@ -19,11 +22,23 @@ SRC = 	./src/main.c		\
 		./src/transform.c	\
 		./src/scale.c
 
-#Source directory
-
-
 #Object files
 OBJ = $(SRC:.c=.o)
+
+#Bonus files
+BONUS = ./bonus/main_bonus			\
+		./bonus/img_bonus			\
+		./bonus/events_bonus		\
+		./bonus/validation_bonus	\
+		./bonus/read_map_bonus		\
+		./bonus/utils_bonus			\
+		./bonus/draw_bonus			\
+		./bonus/color_bonus			\
+		./bonus/transform_bonus		\
+		./bonus/scale_bonus
+
+#Bonus object files
+BONUS_OBJ = $(BONUS:.c=.o)
 
 #Libraries
 LIBS = -lmlx -Llibft -lft -Lft_printf -lftprintf -lXext -lX11 -lm -lz
@@ -42,6 +57,11 @@ $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 %.o: %.c
 	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
 
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(BONUS_OBJ) $(LIBFT) $(PRINTF)
+	$(CC) $(CC_FLAGS) $(BONUS_OBJ) $(LIBS) -o $(BONUS_NAME)
+
 $(LIBFT):
 	@make -C libft
 
@@ -54,7 +74,8 @@ clean_all:
 	@make -C ft_printf clean
 
 clean_lib:
-	@make -C libft cleansrc/draw_line.c
+	@make -C libft clean
+	@make -C ft_printf clean
 
 clean:
 	rm -rf $(OBJ)
@@ -64,7 +85,7 @@ fclean_all: clean_all
 	@make -C libft fclean
 	@make -C ft_printf fclean
 
-fclean_lib: clean_libs
+fclean_lib: clean_lib
 	@make -C libft fclean
 	@make -C ft_printf fclean
 

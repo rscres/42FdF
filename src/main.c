@@ -6,7 +6,7 @@
 /*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:22:54 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/15 18:37:28 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/15 23:04:59 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_cam(t_camera *camera)
 {
 	camera->offset_x = WINDOW_WIDTH / 2;
-	camera->offset_y = WINDOW_HEIGHT / 2;
+	camera->offset_y = (WINDOW_HEIGHT / 2) - 50;
 	camera->zoom = 1;
 	camera->rotation = 150;
 	camera->projection = 1;

@@ -6,7 +6,7 @@
 /*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/15 18:36:30 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/15 23:15:14 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <mlx.h>
 # include <math.h>
 # include <stdlib.h>
-# include <stdio.h> //remove
 # include <fcntl.h>
 # include <unistd.h>
 # include "libft/libft.h"
@@ -56,14 +55,6 @@ typedef struct s_v3df {
 	float	y;
 	float	z;
 }	t_v3df;
-
-//Line struct
-typedef struct s_line {
-	t_point	start;
-	t_point	end;
-	int		color_start;
-	int		color_end;
-}	t_line;
 
 //Map struct containing basic map info
 typedef struct s_map {
@@ -124,8 +115,6 @@ enum {
 };
 
 //FUNCTIONS
-//main.c
-
 //events.c
 int				handle_key_input(int key, t_win *win);
 int				on_close(t_win *win);
