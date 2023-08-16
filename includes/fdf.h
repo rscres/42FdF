@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/16 14:29:37 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/16 15:06:53 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 # include "color.h"
-# include "keys.h"
 
 //Window dimensions definition
 # define WINDOW_WIDTH 900
