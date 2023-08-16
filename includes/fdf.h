@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/16 13:37:44 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:29:37 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <X11/keysym.h>
 # include "libft/libft.h"
 # include "ft_printf/ft_printf.h"
 # include "color.h"
@@ -92,7 +93,7 @@ typedef struct s_camera {
 	int		offset_y;
 	int		rotation;
 	int		projection;
-	t_point	rot;
+	t_v3df	rot;
 }	t_camera;
 
 //Master struct to nest other structs
@@ -165,5 +166,9 @@ void			move_x(int value, t_camera *cam);
 //background.c
 void			set_background(t_img *background, t_win *win);
 void			color_background(t_img *img, int color);
+
+//rotate.c
+void			add_angle(int key, t_master *master);
+void			rotate(t_matrix *start, t_matrix *end, t_camera cam);
 
 #endif // FDF_H

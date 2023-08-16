@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
+/*   transform_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:05:18 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/13 19:10:45 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:25:23 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_master *master)
 	dist = get_dist(master->map);
 	center(&start_tmp, master->map);
 	center(&end_tmp, master->map);
+	rotate(&start_tmp, &end_tmp, cam);
 	to_iso(&start_tmp);
 	to_iso(&end_tmp);
 	start_tmp.x = (start_tmp.f_point.x * dist * cam.zoom) + cam.offset_x;
@@ -89,4 +90,6 @@ void	transform(t_master *master)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(master->win.mlx_ptr, master->win.win_ptr,
+		master->mlx_img.img, 0, 0);
 }

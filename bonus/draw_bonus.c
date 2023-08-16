@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw.c                                             :+:      :+:    :+:   */
+/*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/15 22:23:20 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/16 14:33:32 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
 
-	if ((x < 0 || x > WINDOW_WIDTH) || (y < 0 || y > WINDOW_HEIGHT))
+	if ((x < 0 || x > WINDOW_WIDTH - 1) || (y < 0 || y > WINDOW_HEIGHT - 1))
 		return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int *)dst = color;
@@ -92,8 +92,8 @@ void	draw_line(t_matrix start, t_matrix end, t_img *mlx_img)
 
 int	draw(t_master *master)
 {
+	mlx_clear_window(master->win.mlx_ptr, master->win.win_ptr);
+	color_background(&master->mlx_img, DARK_GREY);
 	transform(master);
-	mlx_put_image_to_window(master->win.mlx_ptr, master->win.win_ptr,
-		master->mlx_img.img, 0, 0);
 	return (0);
 }

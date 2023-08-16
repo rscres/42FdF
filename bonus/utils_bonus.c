@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/15 18:31:55 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/16 13:36:56 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,10 @@ void	bad_map_exit(char **split_line, t_map *map)
 	free(split_line);
 	ft_putstr("Error: map is not well formatted\n");
 	exit (1);
+}
+
+void	reset_view(t_master *master)
+{
+	init_cam(&master->camera);
+	initial_zoom(master->matrix, &master->camera, master->map);
 }

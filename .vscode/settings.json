@@ -9,6 +9,7 @@
 		"random": "c",
 		"cmath": "c",
 		"linked_lst.h": "c",
-		"fdf.h": "c"
+		"fdf.h": "c",
+		"x.h": "c"
 	}
 }
