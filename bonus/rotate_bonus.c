@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:19:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 14:35:22 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/16 14:55:51 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,13 @@ void	add_angle(int key, t_master *master)
 
 	angle = 5 * (M_PI / 180.0);
 	if (key == XK_KP_Left)
-		master->camera.rot.y += angle;
-	else if (key == XK_KP_Right)
-		master->camera.rot.y -= angle;
-	else if (key == XK_KP_Up)
 		master->camera.rot.x += angle;
-	else if (key == XK_KP_Down)
+	else if (key == XK_KP_Right)
 		master->camera.rot.x -= angle;
+	else if (key == XK_KP_Up)
+		master->camera.rot.y += angle;
+	else if (key == XK_KP_Down)
+		master->camera.rot.y -= angle;
 	else if (key == XK_KP_Home)
 		master->camera.rot.z += angle;
 	else if (key == XK_KP_Page_Up)
