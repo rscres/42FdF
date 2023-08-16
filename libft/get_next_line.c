@@ -3,86 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/10 18:50:19 by cado-car          #+#    #+#             */
-/*   Updated: 2023/08/07 20:14:34 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/08/15 22:51:03 by renato            #+#    #+#             */
+/*   Updated: 2023/08/15 22:51:09 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-ssize_t	read_file(int fd, char **buffer, char **buff_read, char **line);
-char	*get_line(char **buff_read, char **line);
-
-/* 
-*	GET_NEXT_LINE
-*	-------------
-*	DESCRIPTION
-*	This function takes an opened file descriptor and returns its next line. 
-*	This function has undefined behavior when reading from a binary file.
-*	PARAMETERS
-*	#1. A file descriptor 
-*	RETURN VALUES
-*	If successful, get_next_line returns a string with the full line ending in
-*	a line break (`\n`) when there is one.
-*	If an error occurs, or there's nothing more to read, it returns NULL.
-*	----------------------------------------------------------------------------
-*	AUXILIARY FUNCTIONS
-*	-------------------
-*	READ_FILE
-*	---------
-*	Checks if there's a line break in the buffer from the static variable 
-*	`buff_read` from previous runs of get_next_line. If yes, sends the buffer to 
-*	the get_line function. If not, reads file in loop until it reaches the next
-*	line break `\n` or the end of the file. In this version, get_next_line must 
-*	be able to manage multiple file descriptors opened at the same time.
-*	PARAMETERS
-*	#1. A file descriptor
-*	#2. The buffer to be passed to the `read` function
-*	#3. The cumulative static buffer from previous runs of get_next_line
-*	#4. The pointer to the line to be extracted from buffer
-*	RETURN VALUES
-*	The number of bytes read during the function call, or 0 if EOF.
-*	---------
-*	GET_LINE
-*	---------
-*	Extracts the line (ending in either line break and `\0` or only `\0` in EOF)
-*	from static buffer.
-*	PARAMETERS
-*	#1. The cumulative static buffer from previous runs of get_next_line
-*	#4. The pointer to the line to be extracted from buffer
-*	RETURN VALUES
-*	The new updated buffer with whatever is left from the original, minus the
-*	line extracted.
-*/
-
-char	*get_next_line(int fd)
+char	*get_line(char **buff_read, char **line)
 {
-	static char		*buff_read[FD_MAX];
-	char			*buffer;
-	char			*line;
-	ssize_t			n;
+	size_t	i;
+	char	*new_buff;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX)
-		return (NULL);
-	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
-		return (NULL);
-	if (read(fd, buffer, 0) < 0)
+	i = 0;
+	new_buff = NULL;
+	while ((*(*buff_read + i) != '\n') && (*(*buff_read + i) != '\0'))
+		i++;
+	if (*(*buff_read + i) == '\n')
 	{
-		free(buffer);
-		return (NULL);
+		i++;
+		*line = ft_substr(*buff_read, 0, i);
+		new_buff = ft_strdup(*buff_read + i);
 	}
-	if (!buff_read[fd])
-		buff_read[fd] = ft_strdup("");
-	n = read_file(fd, &buffer, &buff_read[fd], &line);
-	if (n == 0 && !line)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	return (line);
+	else
+		*line = ft_strdup(*buff_read);
+	free(*buff_read);
+	*buff_read = NULL;
+	return (new_buff);
 }
 
 ssize_t	read_file(int fd, char **buffer, char **buff_read, char **line)
@@ -110,24 +59,30 @@ ssize_t	read_file(int fd, char **buffer, char **buff_read, char **line)
 	return (n);
 }
 
-char	*get_line(char **buff_read, char **line)
+char	*get_next_line(int fd)
 {
-	size_t	i;
-	char	*new_buff;
+	static char		*buff_read[FD_MAX];
+	char			*buffer;
+	char			*line;
+	ssize_t			n;
 
-	i = 0;
-	new_buff = NULL;
-	while ((*(*buff_read + i) != '\n') && (*(*buff_read + i) != '\0'))
-		i++;
-	if (*(*buff_read + i) == '\n')
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > FD_MAX)
+		return (NULL);
+	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
+	if (read(fd, buffer, 0) < 0)
 	{
-		i++;
-		*line = ft_substr(*buff_read, 0, i);
-		new_buff = ft_strdup(*buff_read + i);
+		free(buffer);
+		return (NULL);
 	}
-	else
-		*line = ft_strdup(*buff_read);
-	free(*buff_read);
-	*buff_read = NULL;
-	return (new_buff);
+	if (!buff_read[fd])
+		buff_read[fd] = ft_strdup("");
+	n = read_file(fd, &buffer, &buff_read[fd], &line);
+	if (n == 0 && !line)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	return (line);
 }

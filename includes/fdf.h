@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/13 18:05:35 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/15 18:36:30 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ int				read_map(t_master *master, char *map_file);
 //utils.c
 unsigned int	ft_atox(char *hex);
 void			clear_array(t_matrix **matrix, t_map map);
+void			bad_map_exit(char **split_line, t_map *map);
 
 //draw.c
 int				draw(t_master *master);

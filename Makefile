@@ -74,3 +74,5 @@ fclean: clean
 re_all: fclean_all all
 
 re: fclean all
+
+.PHONY: all clean fclean re
