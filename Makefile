@@ -26,16 +26,18 @@ SRC = 	./src/main.c		\
 OBJ = $(SRC:.c=.o)
 
 #Bonus files
-BONUS = ./bonus/main_bonus			\
-		./bonus/img_bonus			\
-		./bonus/events_bonus		\
-		./bonus/validation_bonus	\
-		./bonus/read_map_bonus		\
-		./bonus/utils_bonus			\
-		./bonus/draw_bonus			\
-		./bonus/color_bonus			\
-		./bonus/transform_bonus		\
-		./bonus/scale_bonus
+BONUS = ./bonus/main_bonus.c		\
+		./bonus/img_bonus.c			\
+		./bonus/events_bonus.c		\
+		./bonus/validation_bonus.c	\
+		./bonus/read_map_bonus.c	\
+		./bonus/utils_bonus.c		\
+		./bonus/draw_bonus.c		\
+		./bonus/color_bonus.c		\
+		./bonus/transform_bonus.c	\
+		./bonus/scale_bonus.c		\
+		./bonus/move_bonus.c		\
+		./bonus/background_bonus.c
 
 #Bonus object files
 BONUS_OBJ = $(BONUS:.c=.o)
@@ -54,13 +56,13 @@ all: $(NAME)
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CC_FLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
-%.o: %.c
-	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
-
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(BONUS_OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CC_FLAGS) $(BONUS_OBJ) $(LIBS) -o $(BONUS_NAME)
+
+%.o: %.c
+	$(CC) $(CC_FLAGS) -I. -I./includes/ -O3 -c $< -o $@
 
 $(LIBFT):
 	@make -C libft
@@ -70,6 +72,7 @@ $(PRINTF):
 
 clean_all:
 	rm -rf $(OBJ)
+	rm -rf $(BONUS_OBJ)
 	@make -C libft clean
 	@make -C ft_printf clean
 
@@ -79,6 +82,9 @@ clean_lib:
 
 clean:
 	rm -rf $(OBJ)
+
+clean_bonus:
+	rm -rf $(BONUS_OBJ)
 
 fclean_all: clean_all
 	rm -rf $(NAME)
@@ -91,6 +97,9 @@ fclean_lib: clean_lib
 
 fclean: clean
 	rm -rf $(NAME)
+
+fclean_bonus: clean_bonus
+	rm -rf $(BONUS_NAME)
 
 re_all: fclean_all all
 

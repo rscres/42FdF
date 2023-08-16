@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/15 23:15:14 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/16 13:37:44 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_camera {
 	int		offset_y;
 	int		rotation;
 	int		projection;
+	t_point	rot;
 }	t_camera;
 
 //Master struct to nest other structs
@@ -101,6 +102,7 @@ typedef struct s_master {
 	t_img		mlx_img;
 	t_map		map;
 	t_camera	camera;
+	t_img		background;
 }	t_master;
 
 //Event enum
@@ -115,10 +117,12 @@ enum {
 };
 
 //FUNCTIONS
+//main.c
+void			init_cam(t_camera *camera);
+
 //events.c
-int				handle_key_input(int key, t_win *win);
+int				handle_key_input(int key, t_master *master);
 int				on_close(t_win *win);
-int				handle_no_event(void);
 
 //img.c
 void			init_img(t_win *win, t_img *mlx_img, char *argv);
@@ -135,6 +139,7 @@ int				read_map(t_master *master, char *map_file);
 unsigned int	ft_atox(char *hex);
 void			clear_array(t_matrix **matrix, t_map map);
 void			bad_map_exit(char **split_line, t_map *map);
+void			reset_view(t_master *master);
 
 //draw.c
 int				draw(t_master *master);
@@ -151,5 +156,14 @@ int				get_dist(t_map map);
 
 //scale.c
 void			initial_zoom(t_matrix **matrix, t_camera *cam, t_map map);
+void			update_zoom(int key, t_camera *cam);
+
+//move.c
+void			move_y(int value, t_camera *cam);
+void			move_x(int value, t_camera *cam);
+
+//background.c
+void			set_background(t_img *background, t_win *win);
+void			color_background(t_img *img, int color);
 
 #endif // FDF_H

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scale.c                                            :+:      :+:    :+:   */
+/*   scale_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/13 14:59:15 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/15 18:27:52 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/16 12:09:17 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,12 @@ void	initial_zoom(t_matrix **matrix, t_camera *cam, t_map map)
 		}
 	}
 	set_zoom(max, min, cam);
+}
+
+void	update_zoom(int key, t_camera *cam)
+{
+	if (key == KEY_R)
+		cam->zoom *= 1.1;
+	else if (key == KEY_T)
+		cam->zoom *= 0.9;
 }

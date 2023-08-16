@@ -1,38 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.h                                            :+:      :+:    :+:   */
+/*   move_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/19 20:11:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 12:02:15 by rseelaen         ###   ########.fr       */
+/*   Created: 2023/08/16 10:26:56 by rseelaen          #+#    #+#             */
+/*   Updated: 2023/08/16 11:30:01 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLOR_H
-# define COLOR_H
+#include "fdf.h"
 
-# define RED		0xff3800
-# define ORANGE		0xffa000
-# define BLUE		0x0057cc
-# define GREEN		0x00cc44
-# define YELLOW		0xffe400
-# define GREY		0x91a3b0
-# define BLACK		0x000000
-# define DARK_GREY	0x202020
+void	move_y(int value, t_camera *cam)
+{
+	cam->offset_y += value;
+}
 
-typedef struct s_color {
-	int	a;
-	int	r;
-	int	g;
-	int	b;
-}			t_color;
-
-typedef struct s_map_colors {
-	int	max;
-	int	min;
-	int	zero;
-}			t_map_colors;
-
-#endif //COLOR_H
+void	move_x(int value, t_camera *cam)
+{
+	cam->offset_x += value;
+}
