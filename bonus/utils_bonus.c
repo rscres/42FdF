@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 13:36:56 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:39:12 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 unsigned int	ft_atox(char *hex)
 {

@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 10:26:56 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 11:30:01 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:39:52 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	move_y(int value, t_camera *cam)
 {

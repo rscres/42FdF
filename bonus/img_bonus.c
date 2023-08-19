@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:20:23 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 13:08:04 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:39:47 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	init_img(t_win *win, t_img *mlx_img, char *argv)
 {

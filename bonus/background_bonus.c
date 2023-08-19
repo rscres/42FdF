@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:45:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 13:18:16 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 14:38:50 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	color_background(t_img *img, int color)
 {

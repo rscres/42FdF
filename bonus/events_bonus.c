@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 14:27:47 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 17:11:17 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <X11/keysym.h>
 
 int	handle_key_input(int key, t_master *master)
@@ -35,6 +35,8 @@ int	handle_key_input(int key, t_master *master)
 	if (key == XK_KP_Left || key == XK_KP_Up || key == XK_KP_Right
 		|| key == XK_KP_Down || key == XK_KP_Home || key == XK_KP_Page_Up)
 		add_angle(key, master);
+	if (key == XK_j || key == XK_k)
+		update_scale(key, &master->camera);
 	return (0);
 }
 

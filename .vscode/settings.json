@@ -10,6 +10,7 @@
 		"cmath": "c",
 		"linked_lst.h": "c",
 		"fdf.h": "c",
-		"x.h": "c"
+		"x.h": "c",
+		"fdf_bonus.h": "c"
 	}
 }

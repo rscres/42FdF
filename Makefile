@@ -38,7 +38,8 @@ BONUS = ./bonus/main_bonus.c		\
 		./bonus/scale_bonus.c		\
 		./bonus/move_bonus.c		\
 		./bonus/background_bonus.c	\
-		./bonus/rotate_bonus.c
+		./bonus/rotate_bonus.c		\
+		./bonus/zoom_bonus.c
 
 #Bonus object files
 BONUS_OBJ = $(BONUS:.c=.o)
@@ -89,6 +90,7 @@ clean_bonus:
 
 fclean_all: clean_all
 	rm -rf $(NAME)
+	rm -rf $(BONUS_OBJ)
 	@make -C libft fclean
 	@make -C ft_printf fclean
 
@@ -102,7 +104,9 @@ fclean: clean
 fclean_bonus: clean_bonus
 	rm -rf $(BONUS_NAME)
 
-re_all: fclean_all all
+re_bonus: fclean_bonus bonus
+
+re_all: fclean_all all bonus
 
 re: fclean all
 

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/19 14:42:02 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:10:33 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef FDF_BONUS_H
+# define FDF_BONUS_H
 
 # include <mlx.h>
 # include <math.h>
@@ -24,11 +24,14 @@
 # include "color.h"
 
 //Window dimensions definition
-# define WINDOW_WIDTH 900
+# define WINDOW_WIDTH 1600
 # define WINDOW_HEIGHT 900
 
 //Angles
 # define RAD_30 0.523599
+# define RAD_35 0.610865
+# define RAD_45 0.785398
+# define RAD_55 0.959931
 
 //STRUCTS
 //MLX required info structs: img and win
@@ -91,9 +94,11 @@ typedef struct s_matrix {
 //Camera struct contains the info for the 
 typedef struct s_camera {
 	float	zoom;
+	float	scale;
 	int		offset_x;
 	int		offset_y;
 	int		projection;
+	t_v3df	rot;
 }	t_camera;
 
 //Master struct to nest other structs
@@ -154,8 +159,10 @@ int				interpolate_color(t_matrix start, t_matrix end, int x);
 //transform.c
 void			transform(t_master *master);
 int				get_dist(t_map map);
+void			to_iso(t_matrix *point, t_camera cam);
+void			center(t_matrix *matrix, t_map map);
 
-//scale.c
+//zoom.c
 void			initial_zoom(t_matrix **matrix, t_camera *cam, t_map map);
 void			update_zoom(int key, t_camera *cam);
 
@@ -170,5 +177,11 @@ void			color_background(t_img *img, int color);
 //rotate.c
 void			add_angle(int key, t_master *master);
 void			rotate(t_matrix *start, t_matrix *end, t_camera cam);
+void			rotate_x(t_matrix *point, float angle);
+void			rotate_y(t_matrix *point, float angle);
+void			rotate_z(t_matrix *point, float angle);
 
-#endif // FDF_H
+//scale.c
+void			update_scale(int key, t_camera *cam);
+
+#endif // FDF_BONUS_H

@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:05:18 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 14:25:23 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:10:16 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	center(t_matrix *matrix, t_map map)
 {
@@ -35,14 +35,17 @@ int	get_dist(t_map map)
 	return (dist);
 }
 
-void	to_iso(t_matrix *point)
+void	to_iso(t_matrix *point, t_camera cam)
 {
-	float	theta;
+	// float	theta;
 
-	theta = 55 * (M_PI / 180.0);
-	point->f_point.x = (point->f_point.x - point->f_point.y) * cos(theta);
-	point->f_point.y = (point->f_point.x + point->f_point.y) * sin(theta)
-		- (point->f_point.z * 0.25);
+	// theta = 50 * (M_PI / 180.0);
+	// point->f_point.x = (point->f_point.x - point->f_point.y) * cos(RAD_35);
+	// point->f_point.y = -(point->f_point.z) + (point->f_point.x + point->f_point.y) * sin(RAD_35);
+	point->f_point.z *= cam.scale;
+	rotate_x(point, RAD_35);
+	rotate_y(point, -RAD_35);
+	rotate_z(point, RAD_45);
 }
 
 void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_master *master)
@@ -56,9 +59,9 @@ void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_master *master)
 	dist = get_dist(master->map);
 	center(&start_tmp, master->map);
 	center(&end_tmp, master->map);
+	to_iso(&start_tmp, cam);
+	to_iso(&end_tmp, cam);
 	rotate(&start_tmp, &end_tmp, cam);
-	to_iso(&start_tmp);
-	to_iso(&end_tmp);
 	start_tmp.x = (start_tmp.f_point.x * dist * cam.zoom) + cam.offset_x;
 	start_tmp.y = (start_tmp.f_point.y * dist * cam.zoom) + cam.offset_y;
 	end_tmp.x = (end_tmp.f_point.x * dist * cam.zoom) + cam.offset_x;

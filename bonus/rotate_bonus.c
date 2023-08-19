@@ -6,11 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 13:19:39 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 15:05:37 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 18:42:22 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "fdf_bonus.h"
 #include <stdio.h>
 
 void	rotate_x(t_matrix *point, float angle)
@@ -57,14 +57,14 @@ void	add_angle(int key, t_master *master)
 {
 	float	angle;
 
-	angle = 5 * (M_PI / 360);
-	if (key == XK_KP_Left)
+	angle = 5 * (M_PI / 180);
+	if (key == XK_KP_Up)
 		master->camera.rot.x += angle;
-	else if (key == XK_KP_Right)
-		master->camera.rot.x -= angle;
-	else if (key == XK_KP_Up)
-		master->camera.rot.y += angle;
 	else if (key == XK_KP_Down)
+		master->camera.rot.x -= angle;
+	else if (key == XK_KP_Left)
+		master->camera.rot.y += angle;
+	else if (key == XK_KP_Right)
 		master->camera.rot.y -= angle;
 	else if (key == XK_KP_Home)
 		master->camera.rot.z += angle;
