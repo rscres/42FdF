@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:05:18 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 19:10:16 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:23:59 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ int	get_dist(t_map map)
 
 void	to_iso(t_matrix *point, t_camera cam)
 {
-	// float	theta;
-
-	// theta = 50 * (M_PI / 180.0);
-	// point->f_point.x = (point->f_point.x - point->f_point.y) * cos(RAD_35);
-	// point->f_point.y = -(point->f_point.z) + (point->f_point.x + point->f_point.y) * sin(RAD_35);
 	point->f_point.z *= cam.scale;
 	rotate_x(point, RAD_35);
 	rotate_y(point, -RAD_35);

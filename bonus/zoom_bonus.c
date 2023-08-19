@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:22:26 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 19:11:02 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/19 19:14:08 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void	set_min_max(t_v3df *max, t_v3df *min, t_v3df *cur)
 static void	set_zoom(t_v3df max, t_v3df min, t_camera *cam)
 {
 	if (WINDOW_WIDTH / (max.x - min.x) > WINDOW_HEIGHT / (max.y - min.y))
-		cam->zoom = (WINDOW_WIDTH / (max.x - min.x));
+		cam->zoom = (WINDOW_WIDTH / (max.x - min.x)) * 0.9;
 	else
-		cam->zoom = (WINDOW_HEIGHT / (max.y - min.y));
+		cam->zoom = (WINDOW_HEIGHT / (max.y - min.y)) * 0.9;
 	if (cam->zoom == 0)
 		cam->zoom = 1;
 }
