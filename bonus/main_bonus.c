@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:22:54 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 18:14:29 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/21 12:06:33 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	init_cam(t_camera *camera)
 {
 	camera->offset_x = (WINDOW_WIDTH / 2);
-	camera->offset_y = (WINDOW_HEIGHT / 2);
+	camera->offset_y = (WINDOW_HEIGHT / 2) - 50;
 	camera->zoom = 1;
 	camera->scale = 0.25;
 	camera->projection = 1;

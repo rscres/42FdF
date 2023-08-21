@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/19 14:42:02 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:22:46 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <mlx.h>
+# include "minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -158,17 +158,5 @@ int				get_dist(t_map map);
 //scale.c
 void			initial_zoom(t_matrix **matrix, t_camera *cam, t_map map);
 void			update_zoom(int key, t_camera *cam);
-
-//move.c
-void			move_y(int value, t_camera *cam);
-void			move_x(int value, t_camera *cam);
-
-//background.c
-void			set_background(t_img *background, t_win *win);
-void			color_background(t_img *img, int color);
-
-//rotate.c
-void			add_angle(int key, t_master *master);
-void			rotate(t_matrix *start, t_matrix *end, t_camera cam);
 
 #endif // FDF_H

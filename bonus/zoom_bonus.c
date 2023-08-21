@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zoom_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:22:26 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 19:14:08 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:31:36 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,7 @@ void	initial_zoom(t_matrix **matrix, t_camera *cam, t_map map)
 			set_min_max(&max, &min, &cur.f_point);
 		}
 	}
-	printf("max: x:%f y:%f\n", max.x, max.y);
-	printf("min: x:%f y:%f\n", min.x, min.y);
 	set_zoom(max, min, cam);
-	printf("%f\n", cam->zoom);
 }
 
 void	update_zoom(int key, t_camera *cam)

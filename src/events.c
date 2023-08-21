@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/16 15:07:44 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:24:57 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	handle_key_input(int key, t_master *master)
 	if (key == XK_Escape)
 	{
 		mlx_loop_end(master->win.mlx_ptr);
-		return (1);
+		destroy_win(master);
+		return(1);
 	}
 	return (0);
 }

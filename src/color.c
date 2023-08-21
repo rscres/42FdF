@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/11 19:44:41 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:18:57 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@ int	interpolate_color(t_matrix start, t_matrix end, int x)
 	t_color	color1;
 	t_color	color2;
 
+	if (start.color == end.color)
+		return (start.color);
+	if (end.x - start.x == 0)
+		step = (x - start.y) / (double)(end.y - start.y);
+	else
+		step = (x - start.x) / (double)(end.x - start.x);
 	step = (x - start.x) / (double)(end.x - start.x);
 	color1.r = start.color >> 16 & 0xff;
 	color1.g = start.color >> 8 & 0xff;

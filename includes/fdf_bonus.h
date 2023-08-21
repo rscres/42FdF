@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/19 19:10:33 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 16:51:36 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
 
-# include <mlx.h>
+# include "minilibx-linux/mlx.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>

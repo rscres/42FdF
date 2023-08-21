@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   color_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 18:51:12 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 20:44:25 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
+#include <stdio.h>
 
 int	interpolate_color(t_matrix start, t_matrix end, int x)
 {
@@ -19,7 +20,12 @@ int	interpolate_color(t_matrix start, t_matrix end, int x)
 	t_color	color1;
 	t_color	color2;
 
-	step = (x - start.x) / (double)(end.x - start.x);
+	if (start.color == end.color)
+		return (start.color);
+	if (end.x - start.x == 0)
+		step = (x - start.y) / (double)(end.y - start.y);
+	else
+		step = (x - start.x) / (double)(end.x - start.x);
 	color1.r = start.color >> 16 & 0xff;
 	color1.g = start.color >> 8 & 0xff;
 	color1.b = start.color & 0xff;

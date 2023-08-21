@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
+/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 13:07:55 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 19:31:36 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/20 21:04:17 by renato           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-void	steep_line(t_matrix start, t_matrix end, t_draw_info info,
+void	low_line(t_matrix start, t_matrix end, t_draw_info info,
 	t_img *mlx_img)
 {
 	t_matrix	temp;
@@ -38,19 +38,19 @@ void	steep_line(t_matrix start, t_matrix end, t_draw_info info,
 		info.delta.y = -info.delta.y;
 	}
 	info.slope = (float)info.delta.y / info.delta.x;
-	my_mlx_pixel_put(mlx_img, start.x, start.y, start.color);
+	my_mlx_pixel_put(mlx_img, start.x, start.y, GREEN);
 	y = start.y + info.slope;
 	x = start.x;
 	while (++x < end.x)
 	{
 		my_mlx_pixel_put(mlx_img, x, (int)y, interpolate_color(start,
-				end, (int)x));
+				end, x));
 		y += info.slope;
 	}
 	my_mlx_pixel_put(mlx_img, end.x, end.y, end.color);
 }
 
-void	low_line(t_matrix start, t_matrix end, t_draw_info info,
+void	steep_line(t_matrix start, t_matrix end, t_draw_info info,
 	t_img *mlx_img)
 {
 	t_matrix	temp;
@@ -78,13 +78,35 @@ void	low_line(t_matrix start, t_matrix end, t_draw_info info,
 	my_mlx_pixel_put(mlx_img, end.x, end.y, end.color);
 }
 
+void	vertical_line(t_matrix start, t_matrix end, t_img *mlx_img)
+{
+	t_matrix	temp;
+	int			y;
+
+	if (start.y > end.y)
+	{
+		temp = start;
+		start = end;
+		end = temp;
+	}
+	y = start.y;
+	while (y < end.y)
+	{
+		my_mlx_pixel_put(mlx_img, start.x, y, interpolate_color(start,
+				end, y));
+		y++;
+	}
+}
+
 void	draw_line(t_matrix start, t_matrix end, t_img *mlx_img)
 {
 	t_draw_info	info;
 
 	info.delta.x = end.x - start.x;
 	info.delta.y = end.y - start.y;
-	if (ft_abs(info.delta.x) > ft_abs(info.delta.y))
+	if (info.delta.x == 0)
+		vertical_line(start, end, mlx_img);
+	else if (ft_abs(info.delta.x) < ft_abs(info.delta.y))
 		steep_line(start, end, info, mlx_img);
 	else
 		low_line(start, end, info, mlx_img);
