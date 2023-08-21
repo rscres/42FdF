@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   zoom_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 15:22:26 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/20 21:31:36 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:14:17 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-#include <stdio.h>
 
 static void	init_min_max(t_v3df *max, t_v3df *min)
 {
@@ -35,7 +34,7 @@ static void	set_min_max(t_v3df *max, t_v3df *min, t_v3df *cur)
 
 static void	set_zoom(t_v3df max, t_v3df min, t_camera *cam)
 {
-	if (WINDOW_WIDTH / (max.x - min.x) > WINDOW_HEIGHT / (max.y - min.y))
+	if (WINDOW_WIDTH / (max.x - min.x) < WINDOW_HEIGHT / (max.y - min.y))
 		cam->zoom = (WINDOW_WIDTH / (max.x - min.x)) * 0.9;
 	else
 		cam->zoom = (WINDOW_HEIGHT / (max.y - min.y)) * 0.9;
@@ -68,6 +67,7 @@ void	initial_zoom(t_matrix **matrix, t_camera *cam, t_map map)
 		}
 	}
 	set_zoom(max, min, cam);
+	set_offset(max, min, cam);
 }
 
 void	update_zoom(int key, t_camera *cam)

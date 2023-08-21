@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transform_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 13:05:18 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/20 21:32:01 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:03:27 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	to_iso(t_matrix *point, t_camera cam)
 	rotate_z(point, RAD_45);
 }
 
-void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_master *master)
+void	draw_transform(t_matrix start, t_matrix end, t_camera cam,
+	t_master *master)
 {
 	int			dist;
 	t_matrix	start_tmp;
@@ -54,8 +55,11 @@ void	iso_tf(t_matrix start, t_matrix end, t_camera cam, t_master *master)
 	dist = get_dist(master->map);
 	center(&start_tmp, master->map);
 	center(&end_tmp, master->map);
-	to_iso(&start_tmp, cam);
-	to_iso(&end_tmp, cam);
+	if (cam.projection == 1)
+	{
+		to_iso(&start_tmp, cam);
+		to_iso(&end_tmp, cam);
+	}
 	rotate(&start_tmp, &end_tmp, cam);
 	start_tmp.x = (start_tmp.f_point.x * dist * cam.zoom) + cam.offset_x;
 	start_tmp.y = (start_tmp.f_point.y * dist * cam.zoom) + cam.offset_y;
@@ -75,15 +79,12 @@ void	transform(t_master *master)
 		x = 0;
 		while (x < master->map.width)
 		{
-			if (master->camera.projection == 1)
-			{
-				if (x != master->map.width - 1)
-					iso_tf(master->matrix[y][x], master->matrix[y][x + 1],
-						master->camera, master);
-				if (y != master->map.height - 1)
-					iso_tf(master->matrix[y][x], master->matrix[y + 1][x],
-						master->camera, master);
-			}
+			if (x != master->map.width - 1)
+				draw_transform(master->matrix[y][x], master->matrix[y][x + 1],
+					master->camera, master);
+			if (y != master->map.height - 1)
+				draw_transform(master->matrix[y][x], master->matrix[y + 1][x],
+					master->camera, master);
 			x++;
 		}
 		y++;

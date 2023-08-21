@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 20:33:38 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 14:39:12 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/21 19:13:37 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,12 @@ void	reset_view(t_master *master)
 {
 	init_cam(&master->camera);
 	initial_zoom(master->matrix, &master->camera, master->map);
+}
+
+void	set_offset(t_v3df max, t_v3df min, t_camera *cam)
+{
+	if ((max.y - min.y) / 2 > WINDOW_HEIGHT / 2)
+		cam->offset_y += (WINDOW_HEIGHT - (max.y - min.y)) / 4;
+	if ((max.x - min.x) / 2 > WINDOW_WIDTH / 2)
+		cam->offset_x += (WINDOW_WIDTH - (max.x - min.x)) / 2;
 }

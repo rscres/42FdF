@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/20 21:24:57 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:15:30 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	handle_key_input(int key, t_master *master)
 	{
 		mlx_loop_end(master->win.mlx_ptr);
 		destroy_win(master);
-		return(1);
+		return (1);
 	}
 	return (0);
 }

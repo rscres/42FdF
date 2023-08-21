@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fdf_bonus.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/20 16:51:36 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/21 19:13:57 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_BONUS_H
 # define FDF_BONUS_H
 
-# include "minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -146,11 +146,19 @@ unsigned int	ft_atox(char *hex);
 void			clear_array(t_matrix **matrix, t_map map);
 void			bad_map_exit(char **split_line, t_map *map);
 void			reset_view(t_master *master);
+void			set_offset(t_v3df max, t_v3df min, t_camera *cam);
 
 //draw.c
 int				draw(t_master *master);
 void			draw_line(t_matrix start, t_matrix end, t_img *mlx_img);
 void			my_mlx_pixel_put(t_img *data, int x, int y, int color);
+
+//draw_line.c
+void			low_line(t_matrix start, t_matrix end, t_draw_info info,
+					t_img *mlx_img);
+void			steep_line(t_matrix start, t_matrix end, t_draw_info info,
+					t_img *mlx_img);
+void			vertical_line(t_matrix start, t_matrix end, t_img *mlx_img);
 
 //color.c
 void			set_color(t_matrix **matrix, t_map map);

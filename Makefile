@@ -39,7 +39,8 @@ BONUS = ./bonus/main_bonus.c		\
 		./bonus/move_bonus.c		\
 		./bonus/background_bonus.c	\
 		./bonus/rotate_bonus.c		\
-		./bonus/zoom_bonus.c
+		./bonus/zoom_bonus.c		\
+		./bonus/draw_line_bonus.c
 
 #Bonus object files
 BONUS_OBJ = $(BONUS:.c=.o)
