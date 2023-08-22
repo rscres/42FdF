@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 16:39:43 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 14:39:55 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:30:13 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int	read_map(t_master *master, char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (1);
+	ft_printf("Loading map...\n");
 	get_map_dimension(&master->map, fd);
 	close(fd);
 	master->matrix = (t_matrix **)malloc(sizeof(t_matrix *)
@@ -111,5 +112,6 @@ int	read_map(t_master *master, char *map_file)
 		return (1);
 	set_coords(master->matrix, &master->map, fd);
 	close(fd);
+	ft_printf("Map loaded\n");
 	return (0);
 }

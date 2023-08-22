@@ -6,14 +6,13 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/19 19:43:00 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/21 16:13:12 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:11:26 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_bonus.h"
-#include <stdio.h>
 
-int	interpolate_color(t_matrix start, t_matrix end, int x)
+int	interpolate_color(t_matrix start, t_matrix end, int pos)
 {
 	double	step;
 	int		result;
@@ -23,9 +22,9 @@ int	interpolate_color(t_matrix start, t_matrix end, int x)
 	if (start.color == end.color)
 		return (start.color);
 	if (end.x - start.x == 0)
-		step = (x - start.y) / (double)(end.y - start.y);
+		step = (pos - start.y) / (double)(end.y - start.y);
 	else
-		step = (x - start.x) / (double)(end.x - start.x);
+		step = (pos - start.x) / (double)(end.x - start.x);
 	color1.r = start.color >> 16 & 0xff;
 	color1.g = start.color >> 8 & 0xff;
 	color1.b = start.color & 0xff;

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: renato <renato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/20 21:22:46 by renato           ###   ########.fr       */
+/*   Updated: 2023/08/22 15:11:29 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include "minilibx-linux/mlx.h"
+# include "mlx.h"
 # include <math.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -24,11 +24,8 @@
 # include "color.h"
 
 //Window dimensions definition
-# define WINDOW_WIDTH 900
+# define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 900
-
-//Angles
-# define RAD_30 0.523599
 
 //STRUCTS
 //MLX required info structs: img and win
@@ -140,7 +137,6 @@ int				read_map(t_master *master, char *map_file);
 unsigned int	ft_atox(char *hex);
 void			clear_array(t_matrix **matrix, t_map map);
 void			bad_map_exit(char **split_line, t_map *map);
-void			reset_view(t_master *master);
 
 //draw.c
 int				draw(t_master *master);

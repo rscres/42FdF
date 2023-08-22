@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/21 18:23:30 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:46:06 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ void	change_view(int key, t_camera *cam)
 	if (key == XK_i)
 		cam->projection = 1;
 	if (key == XK_t)
+	{
+		cam->rot.x = 0;
+		cam->rot.y = 0;
+		cam->rot.z = 0;
 		cam->projection = 0;
+	}
 }
 
 int	handle_key_input(int key, t_master *master)

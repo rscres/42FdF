@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 13:47:41 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/21 19:15:30 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:16:25 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ int	handle_key_input(int key, t_master *master)
 	if (key == XK_Escape)
 	{
 		mlx_loop_end(master->win.mlx_ptr);
-		destroy_win(master);
 		return (1);
 	}
 	return (0);

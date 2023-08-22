@@ -6,12 +6,11 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 15:16:54 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/06/14 11:46:40 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 13:34:26 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 int	ft_putchar(char c)
 {
@@ -101,15 +100,3 @@ int	ft_printf(const char *str, ...)
 	va_end(args);
 	return (len);
 }
-
-// int main(void)
-// {
-// 	int len1 = ft_printf("' %x % d %#y'\n", 100, 100);
-// 	int len2 = printf("' %x % d %#y'\n", 100, 100);
-// 	printf("len1: %d\nlen2: %d\n", len1, len2);
-
-// 	printf(" %%%% " );
-// 	printf("\n");
-// 	ft_printf(" %%%% ");
-// 	printf("\n");
-// }

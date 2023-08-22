@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 12:45:42 by rseelaen          #+#    #+#             */
-/*   Updated: 2023/08/19 14:38:50 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 14:47:21 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,4 @@ void	color_background(t_img *img, int color)
 			my_mlx_pixel_put(img, j++, i, color);
 		i++;
 	}
-}
-
-void	set_background(t_img *background, t_win *win)
-{
-	background->img = mlx_new_image(win->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	background->addr = mlx_get_data_addr(background->img,
-			&background->bits_per_pixel,
-			&background->line_length, &background->endian);
-	color_background(background, DARK_GREY);
 }

@@ -6,7 +6,7 @@
 /*   By: rseelaen <rseelaen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 23:46:30 by renato            #+#    #+#             */
-/*   Updated: 2023/08/21 19:13:57 by rseelaen         ###   ########.fr       */
+/*   Updated: 2023/08/22 15:51:13 by rseelaen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define WINDOW_HEIGHT 900
 
 //Angles
-# define RAD_30 0.523599
 # define RAD_35 0.610865
 # define RAD_45 0.785398
 # define RAD_55 0.959931
@@ -179,7 +178,6 @@ void			move_y(int value, t_camera *cam);
 void			move_x(int value, t_camera *cam);
 
 //background.c
-void			set_background(t_img *background, t_win *win);
 void			color_background(t_img *img, int color);
 
 //rotate.c
