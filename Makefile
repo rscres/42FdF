@@ -73,42 +73,18 @@ $(LIBFT):
 $(PRINTF):
 	@make -C ft_printf
 
-clean_all:
-	rm -rf $(OBJ)
-	rm -rf $(BONUS_OBJ)
-	@make -C libft clean
-	@make -C ft_printf clean
-
-clean_lib:
-	@make -C libft clean
-	@make -C ft_printf clean
-
 clean:
 	rm -rf $(OBJ)
-
-clean_bonus:
 	rm -rf $(BONUS_OBJ)
-
-fclean_all: clean_all
-	rm -rf $(NAME)
-	rm -rf $(BONUS_OBJ)
-	@make -C libft fclean
-	@make -C ft_printf fclean
-
-fclean_lib: clean_lib
-	@make -C libft fclean
-	@make -C ft_printf fclean
+	@make -C libft clean
+	@make -C ft_printf clean
 
 fclean: clean
-	rm -rf $(NAME)
-
-fclean_bonus: clean_bonus
 	rm -rf $(BONUS_NAME)
+	rm -rf $(NAME)
+	@make -C libft fclean
+	@make -C ft_printf fclean
 
-re_bonus: fclean_bonus bonus
-
-re_all: fclean_all all bonus
-
-re: fclean all
+re: fclean all bonus
 
 .PHONY: all clean fclean re
