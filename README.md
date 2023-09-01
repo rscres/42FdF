@@ -1,4 +1,4 @@
-# 42FdF
+# FdF
 <p align="center">
 	<img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/rscres/42FdF?color=lightblue" />
 	<img alt="Code language count" src="https://img.shields.io/github/languages/count/rscres/42FdF?color=yellow" />
