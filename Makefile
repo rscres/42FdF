@@ -46,7 +46,7 @@ BONUS = ./bonus/main_bonus.c		\
 BONUS_OBJ = $(BONUS:.c=.o)
 
 #Libraries
-LIBS = -lmlx -Llibft -lft -Lft_printf -lftprintf -lXext -lX11 -lm -lz
+LIBS = -Lmlx -lmlx_Linux -Llibft -lft -Lft_printf -lftprintf -lXext -lX11 -lm -lz
 
 #Libft
 LIBFT = ./libft/libft.a
@@ -54,14 +54,17 @@ LIBFT = ./libft/libft.a
 #Ft_printf
 PRINTF = ./ft_printf/libftprintf.a
 
+#MLX
+MLX = ./mlx/libmlx_Linux.a
+
 all: $(NAME)
 
-$(NAME): $(OBJ) $(LIBFT) $(PRINTF)
+$(NAME): $(OBJ) $(LIBFT) $(PRINTF) $(MLX)
 	$(CC) $(CC_FLAGS) $(OBJ) $(LIBS) -o $(NAME)
 
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(BONUS_OBJ) $(LIBFT) $(PRINTF)
+$(BONUS_NAME): $(BONUS_OBJ) $(LIBFT) $(PRINTF) $(MLX)
 	$(CC) $(CC_FLAGS) $(BONUS_OBJ) $(LIBS) -o $(BONUS_NAME)
 
 %.o: %.c
@@ -73,17 +76,22 @@ $(LIBFT):
 $(PRINTF):
 	@make -C ft_printf
 
+$(MLX):
+	@make -C mlx
+
 clean:
 	rm -rf $(OBJ)
 	rm -rf $(BONUS_OBJ)
 	@make -C libft clean
 	@make -C ft_printf clean
+	@make -C mlx clean
 
 fclean: clean
 	rm -rf $(BONUS_NAME)
 	rm -rf $(NAME)
 	@make -C libft fclean
 	@make -C ft_printf fclean
+	@make -C mlx clean
 
 re: fclean all bonus
 
